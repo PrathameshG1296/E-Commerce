@@ -13,8 +13,8 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, adminO
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-slate-400 font-sans">
-        <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+      <div className="min-h-screen bg-rose-50 flex flex-col items-center justify-center text-stone-500 font-sans">
+        <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
         <span className="text-sm font-medium tracking-wide">Loading credentials...</span>
       </div>
     )

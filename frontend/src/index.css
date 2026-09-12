@@ -8,8 +8,8 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: #0b0f19; /* premium dark background */
-  color: #f3f4f6;
+  background-color: #fcfafa; /* clean, airy white/rose background */
+  color: #292524; /* text-stone-800 */
   margin: 0;
   padding: 0;
   min-height: 100vh;

@@ -5,9 +5,9 @@ import { Footer } from '../components/Footer'
 
 export const StoreLayout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans relative selection:bg-indigo-500 selection:text-white">
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-screen bg-rose-50 text-stone-900 flex flex-col font-sans relative selection:bg-rose-400 selection:text-white">
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-400/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-pink-400/5 rounded-full blur-[120px] pointer-events-none" />
 
       <Header />
 

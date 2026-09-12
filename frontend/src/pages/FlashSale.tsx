@@ -46,8 +46,8 @@ export const FlashSale: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-slate-400">
-        <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-stone-500">
+        <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
         <span className="text-sm">Loading flash sale...</span>
       </div>
     )
@@ -57,13 +57,13 @@ export const FlashSale: React.FC = () => {
     return (
       <div className="max-w-6xl mx-auto px-6 py-16 w-full text-center">
         <Zap className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-        <h1 className="font-display font-extrabold text-2xl text-white">No Active Flash Sale</h1>
-        <p className="mt-2 text-sm text-slate-400 max-w-md mx-auto">
+        <h1 className="font-display font-extrabold text-2xl text-stone-900">No Active Flash Sale</h1>
+        <p className="mt-2 text-sm text-stone-500 max-w-md mx-auto">
           {error || 'Check back soon for limited-time deals.'}
         </p>
         <Link
           to="/offers"
-          className="mt-6 inline-flex items-center text-sm font-semibold text-indigo-400 hover:text-indigo-300"
+          className="mt-6 inline-flex items-center text-sm font-semibold text-rose-300 hover:text-rose-300"
         >
           Browse offers
           <ArrowRight className="w-4 h-4 ml-1" />
@@ -81,15 +81,15 @@ export const FlashSale: React.FC = () => {
               <Zap className="w-3.5 h-3.5" />
               Flash Sale
             </span>
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white">{sale.title}</h1>
-            <p className="mt-2 text-sm text-slate-400">Limited-time prices — grab them before they&apos;re gone.</p>
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-stone-900">{sale.title}</h1>
+            <p className="mt-2 text-sm text-stone-500">Limited-time prices — grab them before they&apos;re gone.</p>
           </div>
           {countdown && (
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-950/60 border border-slate-800 rounded-2xl">
+            <div className="flex items-center gap-2 px-4 py-3 bg-rose-50/60 border border-rose-200 rounded-2xl">
               <Clock className="w-5 h-5 text-amber-400" />
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Ends in</p>
-                <p className="text-lg font-bold text-white tabular-nums">{countdown}</p>
+                <p className="text-[10px] uppercase font-bold text-stone-400 tracking-wider">Ends in</p>
+                <p className="text-lg font-bold text-stone-900 tabular-nums">{countdown}</p>
               </div>
             </div>
           )}

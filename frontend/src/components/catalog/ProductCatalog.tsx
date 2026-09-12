@@ -26,8 +26,8 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 w-full">
       <div className="mb-8">
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white">{title}</h1>
-        {subtitle && <p className="mt-2 text-sm text-slate-400 max-w-2xl">{subtitle}</p>}
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-stone-900">{title}</h1>
+        {subtitle && <p className="mt-2 text-sm text-stone-500 max-w-2xl">{subtitle}</p>}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
@@ -52,19 +52,19 @@ export const ProductCatalog: React.FC<ProductCatalogProps> = ({
         <div className="lg:col-span-3 space-y-6">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-grow">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400" />
               <input
                 type="text"
                 value={catalog.searchQuery}
                 onChange={(e) => catalog.setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="block w-full pl-10 pr-4 py-2.5 bg-slate-900/40 border border-slate-850 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 text-sm"
+                className="block w-full pl-10 pr-4 py-2.5 bg-white/60 border border-rose-100 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400/30 text-sm"
               />
             </div>
             <button
               type="button"
               onClick={() => catalog.setShowFilters(!catalog.showFilters)}
-              className="lg:hidden px-4 py-2.5 bg-slate-900 border border-slate-800 text-slate-300 rounded-xl text-sm font-semibold flex items-center justify-center space-x-2"
+              className="lg:hidden px-4 py-2.5 bg-white border border-rose-200 text-stone-700 rounded-xl text-sm font-semibold flex items-center justify-center space-x-2"
             >
               <SlidersHorizontal className="w-4 h-4" />
               <span>Filters</span>
@@ -124,8 +124,8 @@ function CategoryPills({
   const pillClass = (active: boolean) =>
     `px-4 py-1.5 rounded-full text-xs font-semibold transition-all border shrink-0 ${
       active
-        ? 'bg-indigo-500 text-white border-indigo-500 shadow-md shadow-indigo-500/10'
-        : 'bg-slate-900/40 border-slate-850 text-slate-400 hover:text-white hover:border-slate-700'
+        ? 'bg-rose-400 text-white border-rose-400 shadow-md shadow-rose-400/10'
+        : 'bg-white/60 border-rose-100 text-stone-500 hover:text-stone-900 hover:border-rose-300'
     }`
 
   return (

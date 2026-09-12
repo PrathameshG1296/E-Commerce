@@ -25,8 +25,8 @@ export const Trending: React.FC = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 w-full">
       <div className="mb-8">
-        <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white">Trending Now</h1>
-        <p className="mt-2 text-sm text-slate-400">Most viewed products right now — updated from live analytics.</p>
+        <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-stone-900">Trending Now</h1>
+        <p className="mt-2 text-sm text-stone-500">Most viewed products right now — updated from live analytics.</p>
       </div>
 
       {error && (

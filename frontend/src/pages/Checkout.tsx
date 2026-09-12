@@ -52,9 +52,9 @@ export const Checkout: React.FC = () => {
   if (!user) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-        <h1 className="text-2xl font-bold text-white">Login required</h1>
-        <p className="mt-2 text-sm text-slate-400">Please log in to complete checkout.</p>
-        <Link to="/auth" className="mt-6 inline-flex px-5 py-2.5 bg-indigo-500 text-white text-sm font-semibold rounded-xl">
+        <h1 className="text-2xl font-bold text-stone-900">Login required</h1>
+        <p className="mt-2 text-sm text-stone-500">Please log in to complete checkout.</p>
+        <Link to="/auth" className="mt-6 inline-flex px-5 py-2.5 bg-rose-400 text-white text-sm font-semibold rounded-xl">
           Login
         </Link>
       </div>
@@ -64,8 +64,8 @@ export const Checkout: React.FC = () => {
   if (!cartLoading && items.length === 0) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-        <h1 className="text-2xl font-bold text-white">Cart is empty</h1>
-        <Link to="/shop" className="mt-4 inline-flex text-sm text-indigo-400 hover:text-indigo-300">
+        <h1 className="text-2xl font-bold text-stone-900">Cart is empty</h1>
+        <Link to="/shop" className="mt-4 inline-flex text-sm text-rose-300 hover:text-rose-300">
           Continue shopping
         </Link>
       </div>
@@ -147,12 +147,12 @@ export const Checkout: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 w-full">
-      <Link to="/cart" className="inline-flex items-center text-xs font-semibold text-slate-400 hover:text-white mb-6">
+      <Link to="/cart" className="inline-flex items-center text-xs font-semibold text-stone-500 hover:text-stone-900 mb-6">
         <ArrowLeft className="w-4 h-4 mr-1" />
         Back to cart
       </Link>
 
-      <h1 className="font-display font-extrabold text-3xl text-white mb-8">Checkout</h1>
+      <h1 className="font-display font-extrabold text-3xl text-stone-900 mb-8">Checkout</h1>
 
       {error && (
         <div className="mb-6 p-4 border border-rose-500/20 bg-rose-500/5 text-rose-400 text-sm rounded-xl">
@@ -162,64 +162,64 @@ export const Checkout: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <form onSubmit={handlePay} className="lg:col-span-2 space-y-6">
-          <section className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl space-y-4">
-            <div className="flex items-center gap-2 text-white font-semibold">
-              <MapPin className="w-5 h-5 text-indigo-400" />
+          <section className="p-6 bg-white/60 border border-rose-200 rounded-2xl space-y-4">
+            <div className="flex items-center gap-2 text-stone-900 font-semibold">
+              <MapPin className="w-5 h-5 text-rose-300" />
               Shipping Address
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <label className="block sm:col-span-2">
-                <span className="text-xs font-semibold text-slate-400">Full name</span>
+                <span className="text-xs font-semibold text-stone-500">Full name</span>
                 <input
                   required
                   value={form.full_name}
                   onChange={(e) => updateField('full_name', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-semibold text-slate-400">Phone</span>
+                <span className="text-xs font-semibold text-stone-500">Phone</span>
                 <input
                   required
                   value={form.phone}
                   onChange={(e) => updateField('phone', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-xs font-semibold text-slate-400">Address line 1</span>
+                <span className="text-xs font-semibold text-stone-500">Address line 1</span>
                 <input
                   required
                   value={form.address_line1}
                   onChange={(e) => updateField('address_line1', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block sm:col-span-2">
-                <span className="text-xs font-semibold text-slate-400">Address line 2 (optional)</span>
+                <span className="text-xs font-semibold text-stone-500">Address line 2 (optional)</span>
                 <input
                   value={form.address_line2 ?? ''}
                   onChange={(e) => updateField('address_line2', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-semibold text-slate-400">City</span>
+                <span className="text-xs font-semibold text-stone-500">City</span>
                 <input
                   required
                   value={form.city}
                   onChange={(e) => updateField('city', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-semibold text-slate-400">State</span>
+                <span className="text-xs font-semibold text-stone-500">State</span>
                 <select
                   required
                   value={form.state}
                   onChange={(e) => updateField('state', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 >
                   {INDIAN_STATES.map((s) => (
                     <option key={s} value={s}>{s}</option>
@@ -227,31 +227,31 @@ export const Checkout: React.FC = () => {
                 </select>
               </label>
               <label className="block">
-                <span className="text-xs font-semibold text-slate-400">Postal code</span>
+                <span className="text-xs font-semibold text-stone-500">Postal code</span>
                 <input
                   required
                   value={form.postal_code}
                   onChange={(e) => updateField('postal_code', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
               <label className="block">
-                <span className="text-xs font-semibold text-slate-400">Country</span>
+                <span className="text-xs font-semibold text-stone-500">Country</span>
                 <input
                   required
                   value={form.country}
                   onChange={(e) => updateField('country', e.target.value)}
-                  className="mt-1 w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+                  className="mt-1 w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 />
               </label>
 
-              <div className="sm:col-span-2 pt-2 border-t border-slate-800/60">
-                <label className="inline-flex items-center gap-2.5 cursor-pointer text-xs text-slate-300 select-none hover:text-white transition-colors">
+              <div className="sm:col-span-2 pt-2 border-t border-rose-200/60">
+                <label className="inline-flex items-center gap-2.5 cursor-pointer text-xs text-stone-700 select-none hover:text-stone-900 transition-colors">
                   <input
                     type="checkbox"
                     checked={saveToProfile}
                     onChange={(e) => setSaveToProfile(e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-indigo-600 focus:ring-indigo-500/30 cursor-pointer"
+                    className="w-4 h-4 rounded border-rose-300 bg-rose-50 text-rose-500 focus:ring-rose-400/30 cursor-pointer"
                   />
                   <span>Save / update this as my default shipping address in my profile</span>
                 </label>
@@ -262,7 +262,7 @@ export const Checkout: React.FC = () => {
           <button
             type="submit"
             disabled={paying || cartLoading}
-            className="w-full py-3.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:opacity-60 text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2"
+            className="w-full py-3.5 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 disabled:opacity-60 text-stone-900 text-sm font-semibold rounded-xl flex items-center justify-center gap-2"
           >
             {paying ? (
               <>
@@ -278,21 +278,21 @@ export const Checkout: React.FC = () => {
           </button>
         </form>
 
-        <aside className="p-6 bg-slate-900/40 border border-slate-800 rounded-2xl h-fit space-y-4">
-          <h2 className="font-semibold text-white">Order Summary</h2>
+        <aside className="p-6 bg-white/60 border border-rose-200 rounded-2xl h-fit space-y-4">
+          <h2 className="font-semibold text-stone-900">Order Summary</h2>
           <ul className="space-y-3 max-h-64 overflow-y-auto">
             {items.map((item) => (
               <li key={item.id} className="flex justify-between text-sm gap-4">
-                <span className="text-slate-400 line-clamp-1">
+                <span className="text-stone-500 line-clamp-1">
                   {item.products?.name} × {item.quantity}
                 </span>
-                <span className="text-white shrink-0">
+                <span className="text-stone-900 shrink-0">
                   ₹{((item.products?.price ?? 0) * item.quantity).toLocaleString()}
                 </span>
               </li>
             ))}
           </ul>
-          <div className="pt-4 border-t border-slate-800 flex justify-between font-bold text-white">
+          <div className="pt-4 border-t border-rose-200 flex justify-between font-bold text-stone-900">
             <span>Total</span>
             <span>₹{subtotal.toLocaleString()}</span>
           </div>

@@ -50,25 +50,25 @@ export const Home: React.FC = () => {
     <>
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-10 pb-6 w-full">
-        <div className="bg-gradient-to-r from-slate-900 to-indigo-950/40 border border-slate-900 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div className="bg-gradient-to-r from-rose-50 to-pink-100 border border-rose-200 rounded-3xl p-8 md:p-12 relative overflow-hidden">
           <div className="max-w-xl relative z-10 space-y-4">
-            <span className="inline-flex items-center space-x-1.5 px-3 py-1 text-xs font-semibold tracking-wider text-indigo-400 bg-indigo-500/10 rounded-full border border-indigo-500/20">
+            <span className="inline-flex items-center space-x-1.5 px-3 py-1 text-xs font-semibold tracking-wider text-rose-300 bg-rose-400/10 rounded-full border border-rose-400/20">
               <Sparkles className="w-3 h-3" />
               <span>Welcome to NovaCart</span>
             </span>
-            <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-white">
+            <h1 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-stone-900">
               Shop smarter. <br />
-              <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-rose-300 to-pink-300 bg-clip-text text-transparent">
                 Live deals from Supabase.
               </span>
             </h1>
-            <p className="text-sm text-slate-400 max-w-md">
+            <p className="text-sm text-stone-500 max-w-md">
               Premium electronics, fashion, and home essentials — delivered with secure Razorpay checkout.
             </p>
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 to="/shop"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-500/10 transition-all group"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-rose-400 hover:bg-rose-500 text-white text-xs font-bold rounded-xl shadow-lg shadow-rose-400/10 transition-all group"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span>Shop Now</span>
@@ -76,14 +76,14 @@ export const Home: React.FC = () => {
               </Link>
               <Link
                 to="/offers"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-slate-900 border border-slate-800 text-slate-200 hover:text-white text-xs font-bold rounded-xl transition-all"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 bg-white border border-rose-200 text-stone-800 hover:text-stone-900 text-xs font-bold rounded-xl transition-all"
               >
                 <Tag className="w-4 h-4" />
                 <span>View Offers</span>
               </Link>
             </div>
           </div>
-          <ShoppingBag className="absolute right-4 bottom-4 w-32 h-32 md:w-48 md:h-48 text-white opacity-5 md:opacity-10 pointer-events-none" />
+          <ShoppingBag className="absolute right-4 bottom-4 w-32 h-32 md:w-48 md:h-48 text-stone-900 opacity-5 md:opacity-10 pointer-events-none" />
         </div>
       </section>
 
@@ -94,15 +94,15 @@ export const Home: React.FC = () => {
             { to: '/flash-sale', label: 'Flash Sale', icon: Flame, color: 'text-rose-400', badge: flashSaleCount > 0 ? `${flashSaleCount} deals` : undefined },
             { to: '/best-sellers', label: 'Best Sellers', icon: Award, color: 'text-amber-400' },
             { to: '/trending', label: 'Trending', icon: TrendingUp, color: 'text-cyan-400' },
-            { to: '/brands', label: 'Brands', icon: Grid3X3, color: 'text-indigo-400' },
+            { to: '/brands', label: 'Brands', icon: Grid3X3, color: 'text-rose-300' },
           ].map(({ to, label, icon: Icon, color, badge }) => (
             <Link
               key={to}
               to={to}
-              className="flex items-center space-x-3 p-4 bg-slate-900/30 border border-slate-850 rounded-2xl hover:border-slate-700 transition-all group relative"
+              className="flex items-center space-x-3 p-4 bg-white/50 border border-rose-100 rounded-2xl hover:border-rose-300 transition-all group relative"
             >
               <Icon className={`w-5 h-5 ${color}`} />
-              <span className="text-xs font-semibold text-slate-300 group-hover:text-white">{label}</span>
+              <span className="text-xs font-semibold text-stone-700 group-hover:text-stone-900">{label}</span>
               {badge && (
                 <span className="absolute top-2 right-2 text-[9px] font-bold px-1.5 py-0.5 bg-rose-500/20 text-rose-400 rounded-md">
                   {badge}
@@ -119,16 +119,16 @@ export const Home: React.FC = () => {
           {[
             { to: '/new-arrivals', label: 'New Arrivals', icon: Zap, color: 'text-emerald-400' },
             { to: '/offers', label: 'Offers', icon: Tag, color: 'text-rose-400' },
-            { to: '/categories', label: 'Categories', icon: Grid3X3, color: 'text-indigo-400' },
-            { to: '/shop', label: 'All Products', icon: ShoppingBag, color: 'text-purple-400' },
+            { to: '/categories', label: 'Categories', icon: Grid3X3, color: 'text-rose-300' },
+            { to: '/shop', label: 'All Products', icon: ShoppingBag, color: 'text-pink-300' },
           ].map(({ to, label, icon: Icon, color }) => (
             <Link
               key={to}
               to={to}
-              className="flex items-center space-x-3 p-4 bg-slate-900/30 border border-slate-850 rounded-2xl hover:border-slate-700 transition-all group"
+              className="flex items-center space-x-3 p-4 bg-white/50 border border-rose-100 rounded-2xl hover:border-rose-300 transition-all group"
             >
               <Icon className={`w-5 h-5 ${color}`} />
-              <span className="text-xs font-semibold text-slate-300 group-hover:text-white">{label}</span>
+              <span className="text-xs font-semibold text-stone-700 group-hover:text-stone-900">{label}</span>
             </Link>
           ))}
         </div>
@@ -138,8 +138,8 @@ export const Home: React.FC = () => {
       {!loading && categories.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-8 w-full">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display font-bold text-xl text-white">Shop by Category</h2>
-            <Link to="/categories" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center">
+            <h2 className="font-display font-bold text-xl text-stone-900">Shop by Category</h2>
+            <Link to="/categories" className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center">
               View all <ArrowRight className="w-3.5 h-3.5 ml-1" />
             </Link>
           </div>
@@ -148,10 +148,10 @@ export const Home: React.FC = () => {
               <Link
                 key={cat.id}
                 to={`/categories/${cat.slug}`}
-                className="p-5 bg-slate-900/40 border border-slate-800 rounded-2xl hover:border-indigo-500/30 transition-all text-center group"
+                className="p-5 bg-white/60 border border-rose-200 rounded-2xl hover:border-rose-400/30 transition-all text-center group"
               >
-                <Grid3X3 className="w-8 h-8 mx-auto text-indigo-400 mb-2 group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-semibold text-white">{cat.name}</span>
+                <Grid3X3 className="w-8 h-8 mx-auto text-rose-300 mb-2 group-hover:scale-110 transition-transform" />
+                <span className="text-sm font-semibold text-stone-900">{cat.name}</span>
               </Link>
             ))}
           </div>
@@ -161,14 +161,14 @@ export const Home: React.FC = () => {
       {/* Featured */}
       <section className="max-w-6xl mx-auto px-6 py-8 w-full">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-display font-bold text-xl text-white">Featured Products</h2>
-          <Link to="/shop?featured=true" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center">
+          <h2 className="font-display font-bold text-xl text-stone-900">Featured Products</h2>
+          <Link to="/shop?featured=true" className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center">
             See all <ArrowRight className="w-3.5 h-3.5 ml-1" />
           </Link>
         </div>
         {loading ? (
           <div className="h-48 flex items-center justify-center">
-            <Loader2 className="w-8 h-8 text-indigo-500 animate-spin" />
+            <Loader2 className="w-8 h-8 text-rose-400 animate-spin" />
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
@@ -183,8 +183,8 @@ export const Home: React.FC = () => {
       {!loading && bestSellers.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-8 w-full">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display font-bold text-xl text-white">Best Sellers</h2>
-            <Link to="/best-sellers" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center">
+            <h2 className="font-display font-bold text-xl text-stone-900">Best Sellers</h2>
+            <Link to="/best-sellers" className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center">
               View all <ArrowRight className="w-3.5 h-3.5 ml-1" />
             </Link>
           </div>
@@ -200,8 +200,8 @@ export const Home: React.FC = () => {
       {!loading && trending.length > 0 && (
         <section className="max-w-6xl mx-auto px-6 py-8 w-full">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display font-bold text-xl text-white">Trending Now</h2>
-            <Link to="/trending" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center">
+            <h2 className="font-display font-bold text-xl text-stone-900">Trending Now</h2>
+            <Link to="/trending" className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center">
               View all <ArrowRight className="w-3.5 h-3.5 ml-1" />
             </Link>
           </div>
@@ -216,8 +216,8 @@ export const Home: React.FC = () => {
       {/* New arrivals */}
       <section className="max-w-6xl mx-auto px-6 py-8 pb-12 w-full">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="font-display font-bold text-xl text-white">New Arrivals</h2>
-          <Link to="/new-arrivals" className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center">
+          <h2 className="font-display font-bold text-xl text-stone-900">New Arrivals</h2>
+          <Link to="/new-arrivals" className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center">
             View all <ArrowRight className="w-3.5 h-3.5 ml-1" />
           </Link>
         </div>

@@ -18,8 +18,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 }) => {
   if (loading) {
     return (
-      <div className="h-96 flex flex-col items-center justify-center text-slate-400">
-        <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+      <div className="h-96 flex flex-col items-center justify-center text-stone-500">
+        <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
         <span className="text-sm">Loading products...</span>
       </div>
     )
@@ -27,13 +27,13 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
 
   if (products.length === 0) {
     return (
-      <div className="h-96 border border-dashed border-slate-800 rounded-2xl flex flex-col items-center justify-center text-center p-6">
-        <p className="text-slate-400 font-medium">{emptyMessage}</p>
+      <div className="h-96 border border-dashed border-rose-200 rounded-2xl flex flex-col items-center justify-center text-center p-6">
+        <p className="text-stone-500 font-medium">{emptyMessage}</p>
         {onReset && (
           <button
             type="button"
             onClick={onReset}
-            className="mt-4 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold rounded-xl"
+            className="mt-4 px-4 py-2 bg-rose-400/10 border border-rose-400/20 text-rose-300 text-xs font-semibold rounded-xl"
           >
             Reset filters
           </button>

@@ -36,8 +36,8 @@ export const BrandProducts: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-slate-400">
-        <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-stone-500">
+        <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
         <span className="text-sm">Loading brand...</span>
       </div>
     )
@@ -46,8 +46,8 @@ export const BrandProducts: React.FC = () => {
   if (notFound || !brand) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-xl font-bold text-white">Brand not found</h2>
-        <Link to="/brands" className="mt-4 inline-flex items-center text-sm text-indigo-400 hover:text-indigo-300">
+        <h2 className="text-xl font-bold text-stone-900">Brand not found</h2>
+        <Link to="/brands" className="mt-4 inline-flex items-center text-sm text-rose-300 hover:text-rose-300">
           <ArrowLeft className="w-4 h-4 mr-1" />
           All brands
         </Link>
@@ -57,22 +57,22 @@ export const BrandProducts: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8 w-full">
-      <Link to="/brands" className="inline-flex items-center text-xs font-semibold text-slate-400 hover:text-white mb-6">
+      <Link to="/brands" className="inline-flex items-center text-xs font-semibold text-stone-500 hover:text-stone-900 mb-6">
         <ArrowLeft className="w-4 h-4 mr-1" />
         All brands
       </Link>
 
       <div className="flex items-start gap-4 mb-8">
-        <div className="w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center shrink-0 overflow-hidden">
+        <div className="w-16 h-16 rounded-2xl bg-rose-400/10 border border-rose-400/20 flex items-center justify-center shrink-0 overflow-hidden">
           {brand.logo_url ? (
             <img src={brand.logo_url} alt={brand.name} className="w-full h-full object-contain p-2" />
           ) : (
-            <Award className="w-8 h-8 text-indigo-400" />
+            <Award className="w-8 h-8 text-rose-300" />
           )}
         </div>
         <div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white">{brand.name}</h1>
-          {brand.description && <p className="mt-2 text-sm text-slate-400 max-w-2xl">{brand.description}</p>}
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-stone-900">{brand.name}</h1>
+          {brand.description && <p className="mt-2 text-sm text-stone-500 max-w-2xl">{brand.description}</p>}
         </div>
       </div>
 

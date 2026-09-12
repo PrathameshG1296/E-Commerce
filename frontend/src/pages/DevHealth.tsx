@@ -28,26 +28,26 @@ export function DevHealth() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 w-full">
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <span className="px-3 py-1 text-xs font-semibold tracking-wider text-indigo-400 uppercase bg-indigo-500/10 border border-indigo-500/20 rounded-full">
+        <span className="px-3 py-1 text-xs font-semibold tracking-wider text-rose-300 uppercase bg-rose-400/10 border border-rose-400/20 rounded-full">
           Developer Status Panel
         </span>
-        <h1 className="mt-6 font-display font-extrabold text-4xl sm:text-5xl tracking-tight text-white leading-none">
+        <h1 className="mt-6 font-display font-extrabold text-4xl sm:text-5xl tracking-tight text-stone-900 leading-none">
           System Health Check
         </h1>
-        <p className="mt-4 text-slate-400">
+        <p className="mt-4 text-stone-500">
           Monitor frontend, backend, and database connectivity.
         </p>
         <div className="mt-6 flex justify-center gap-3">
-          <Link to="/" className="text-xs font-semibold px-4 py-2 bg-slate-900 border border-slate-800 text-slate-200 hover:text-white rounded-xl">
+          <Link to="/" className="text-xs font-semibold px-4 py-2 bg-white border border-rose-200 text-stone-800 hover:text-stone-900 rounded-xl">
             Go to Store
           </Link>
           {user ? (
-            <Link to="/dashboard" className="text-xs font-semibold px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl flex items-center space-x-1">
+            <Link to="/dashboard" className="text-xs font-semibold px-4 py-2 bg-rose-400 hover:bg-rose-500 text-white rounded-xl flex items-center space-x-1">
               <span>Dashboard</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           ) : (
-            <Link to="/auth" className="text-xs font-semibold px-4 py-2 bg-slate-900 border border-slate-800 text-slate-200 rounded-xl">
+            <Link to="/auth" className="text-xs font-semibold px-4 py-2 bg-white border border-rose-200 text-stone-800 rounded-xl">
               Login
             </Link>
           )}
@@ -55,7 +55,7 @@ export function DevHealth() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6">
+        <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6">
           <div className="flex items-start justify-between">
             <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400">
               <ShieldCheck className="w-6 h-6" />
@@ -64,11 +64,11 @@ export function DevHealth() {
               Active
             </span>
           </div>
-          <h3 className="mt-4 font-semibold text-lg text-white">React Frontend</h3>
-          <p className="mt-2 text-sm text-slate-400">Vite + React 19 + TypeScript + Tailwind CSS</p>
+          <h3 className="mt-4 font-semibold text-lg text-stone-900">React Frontend</h3>
+          <p className="mt-2 text-sm text-stone-500">Vite + React 19 + TypeScript + Tailwind CSS</p>
         </div>
 
-        <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6">
+        <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6">
           <div className="flex items-start justify-between">
             <div className={`p-3 rounded-xl border ${
               backendStatus === 'online'
@@ -89,21 +89,21 @@ export function DevHealth() {
               {backendStatus === 'online' ? 'Connected' : backendStatus === 'offline' ? 'Offline' : 'Connecting...'}
             </span>
           </div>
-          <h3 className="mt-4 font-semibold text-lg text-white">FastAPI Backend</h3>
-          <p className="mt-2 text-sm text-slate-400">{backendUrl}</p>
+          <h3 className="mt-4 font-semibold text-lg text-stone-900">FastAPI Backend</h3>
+          <p className="mt-2 text-sm text-stone-500">{backendUrl}</p>
         </div>
 
-        <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6">
+        <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6">
           <div className="flex items-start justify-between">
-            <div className="p-3 bg-purple-500/10 border border-purple-500/20 rounded-xl text-purple-400">
+            <div className="p-3 bg-pink-400/10 border border-pink-400/20 rounded-xl text-pink-300">
               <Database className="w-6 h-6" />
             </div>
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               Connected
             </span>
           </div>
-          <h3 className="mt-4 font-semibold text-lg text-white">Supabase</h3>
-          <p className="mt-2 text-sm text-slate-400">PostgreSQL + Auth + Storage</p>
+          <h3 className="mt-4 font-semibold text-lg text-stone-900">Supabase</h3>
+          <p className="mt-2 text-sm text-stone-500">PostgreSQL + Auth + Storage</p>
         </div>
       </div>
     </div>

@@ -137,21 +137,21 @@ export const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-4 sm:p-6 md:p-8 flex flex-col justify-between">
+    <div className="min-h-screen bg-rose-50 text-stone-900 font-sans p-4 sm:p-6 md:p-8 flex flex-col justify-between">
       <div className="max-w-6xl mx-auto w-full py-6 flex-grow">
         
         {/* Navigation & Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-850 pb-6 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-rose-100 pb-6 mb-8">
           <div>
             <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-tr from-indigo-500 to-purple-600 p-2.5 rounded-2xl text-white shadow-lg shadow-indigo-500/20">
+              <div className="bg-gradient-to-tr from-rose-400 to-purple-600 p-2.5 rounded-2xl text-stone-900 shadow-lg shadow-rose-400/20">
                 <UserIcon className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="font-display font-extrabold text-2xl text-white">
+                <h1 className="font-display font-extrabold text-2xl text-stone-900">
                   Account & Profile Settings
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-400">
+                <p className="text-xs sm:text-sm text-stone-500">
                   Manage your personal details, default shipping address, and security.
                 </p>
               </div>
@@ -161,7 +161,7 @@ export const Dashboard: React.FC = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/shop"
-              className="flex items-center space-x-1.5 px-4 py-2 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 hover:text-white rounded-xl text-xs font-semibold transition-all"
+              className="flex items-center space-x-1.5 px-4 py-2 bg-white border border-rose-200 hover:bg-rose-100 text-stone-700 hover:text-stone-900 rounded-xl text-xs font-semibold transition-all"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Shop</span>
@@ -198,43 +198,43 @@ export const Dashboard: React.FC = () => {
           {/* Left Column: Profile Summary & Quick Shortcuts */}
           <div className="space-y-6">
             {/* User Identity Card */}
-            <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
+            <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6 backdrop-blur-sm relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-rose-400/5 rounded-full blur-2xl pointer-events-none" />
               
               <div className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 p-1 rounded-2xl text-indigo-400 mb-4 flex items-center justify-center">
-                  <span className="font-display font-black text-2xl text-indigo-300">
+                <div className="w-20 h-20 bg-gradient-to-tr from-rose-400/20 to-pink-400/20 border border-rose-400/30 p-1 rounded-2xl text-rose-300 mb-4 flex items-center justify-center">
+                  <span className="font-display font-black text-2xl text-rose-300">
                     {(formData.full_name || user?.email || 'U')[0].toUpperCase()}
                   </span>
                 </div>
-                <h3 className="font-bold text-lg text-white">
+                <h3 className="font-bold text-lg text-stone-900">
                   {profile?.full_name || 'Member'}
                 </h3>
-                <span className="text-xs text-slate-400 mt-1 font-mono break-all">
+                <span className="text-xs text-stone-500 mt-1 font-mono break-all">
                   {user?.email}
                 </span>
 
                 {profile?.is_admin && (
-                  <span className="mt-3 text-xs font-semibold px-3 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-full flex items-center space-x-1.5 shadow-sm">
+                  <span className="mt-3 text-xs font-semibold px-3 py-1 bg-pink-400/10 text-pink-300 border border-pink-400/20 rounded-full flex items-center space-x-1.5 shadow-sm">
                     <Shield className="w-3.5 h-3.5" />
                     <span>Administrator</span>
                   </span>
                 )}
               </div>
 
-              <div className="mt-6 pt-6 border-t border-slate-800/60 space-y-3 text-xs">
-                <div className="flex items-center justify-between text-slate-400">
+              <div className="mt-6 pt-6 border-t border-rose-200/60 space-y-3 text-xs">
+                <div className="flex items-center justify-between text-stone-500">
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                    <Calendar className="w-3.5 h-3.5 text-stone-400" />
                     Member Since:
                   </span>
-                  <span className="text-slate-300 font-medium">
+                  <span className="text-stone-700 font-medium">
                     {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : 'Active'}
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-slate-400">
+                <div className="flex items-center justify-between text-stone-500">
                   <span className="flex items-center gap-1.5">
-                    <Mail className="w-3.5 h-3.5 text-slate-500" />
+                    <Mail className="w-3.5 h-3.5 text-stone-400" />
                     Email Verified:
                   </span>
                   <span className="text-emerald-400 font-medium flex items-center gap-1">
@@ -245,58 +245,58 @@ export const Dashboard: React.FC = () => {
             </div>
 
             {/* Quick Actions Card */}
-            <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+            <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6 backdrop-blur-sm space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
                 Quick Navigation
               </h4>
 
               <Link
                 to="/orders"
-                className="flex items-center justify-between p-3 bg-slate-950/50 hover:bg-slate-850/60 border border-slate-800/60 hover:border-slate-700 rounded-xl transition-all group"
+                className="flex items-center justify-between p-3 bg-rose-50/50 hover:bg-rose-50/60 border border-rose-200/60 hover:border-rose-300 rounded-xl transition-all group"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg group-hover:bg-indigo-500/20">
+                  <div className="p-2 bg-rose-400/10 text-rose-300 rounded-lg group-hover:bg-rose-400/20">
                     <Package className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-white">My Orders</p>
-                    <p className="text-[11px] text-slate-500">Track and view history</p>
+                    <p className="text-xs font-semibold text-stone-900">My Orders</p>
+                    <p className="text-[11px] text-stone-400">Track and view history</p>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-4 h-4 text-stone-500 group-hover:text-rose-300 group-hover:translate-x-0.5 transition-all" />
               </Link>
 
               <Link
                 to="/cart"
-                className="flex items-center justify-between p-3 bg-slate-950/50 hover:bg-slate-850/60 border border-slate-800/60 hover:border-slate-700 rounded-xl transition-all group"
+                className="flex items-center justify-between p-3 bg-rose-50/50 hover:bg-rose-50/60 border border-rose-200/60 hover:border-rose-300 rounded-xl transition-all group"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-purple-500/10 text-purple-400 rounded-lg group-hover:bg-purple-500/20">
+                  <div className="p-2 bg-pink-400/10 text-pink-300 rounded-lg group-hover:bg-pink-400/20">
                     <ShoppingBag className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-white">Shopping Cart</p>
-                    <p className="text-[11px] text-slate-500">Review saved items</p>
+                    <p className="text-xs font-semibold text-stone-900">Shopping Cart</p>
+                    <p className="text-[11px] text-stone-400">Review saved items</p>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-slate-600 group-hover:text-purple-400 group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="w-4 h-4 text-stone-500 group-hover:text-pink-300 group-hover:translate-x-0.5 transition-all" />
               </Link>
 
               {profile?.is_admin && (
                 <Link
                   to="/admin"
-                  className="flex items-center justify-between p-3 bg-purple-950/30 hover:bg-purple-900/30 border border-purple-500/20 hover:border-purple-500/40 rounded-xl transition-all group"
+                  className="flex items-center justify-between p-3 bg-purple-950/30 hover:bg-purple-900/30 border border-pink-400/20 hover:border-pink-400/40 rounded-xl transition-all group"
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-purple-500/20 text-purple-300 rounded-lg">
+                    <div className="p-2 bg-pink-400/20 text-purple-300 rounded-lg">
                       <Shield className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="text-xs font-semibold text-purple-200">Admin Control Center</p>
-                      <p className="text-[11px] text-purple-400/80">Manage store catalog</p>
+                      <p className="text-[11px] text-pink-300/80">Manage store catalog</p>
                     </div>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-purple-400 group-hover:translate-x-0.5 transition-all" />
+                  <ArrowRight className="w-4 h-4 text-pink-300 group-hover:translate-x-0.5 transition-all" />
                 </Link>
               )}
             </div>
@@ -306,64 +306,64 @@ export const Dashboard: React.FC = () => {
           <div className="lg:col-span-2 space-y-6">
             <form onSubmit={handleSaveProfile} className="space-y-6">
               {/* Section 1: Contact Information */}
-              <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm space-y-5">
-                <div className="flex items-center justify-between border-b border-slate-800/60 pb-3">
+              <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6 backdrop-blur-sm space-y-5">
+                <div className="flex items-center justify-between border-b border-rose-200/60 pb-3">
                   <div className="flex items-center space-x-2">
-                    <UserIcon className="w-4 h-4 text-indigo-400" />
-                    <h2 className="font-bold text-sm text-white">Personal Information</h2>
+                    <UserIcon className="w-4 h-4 text-rose-300" />
+                    <h2 className="font-bold text-sm text-stone-900">Personal Information</h2>
                   </div>
-                  <span className="text-[11px] text-slate-500">Used for orders & communications</span>
+                  <span className="text-[11px] text-stone-400">Used for orders & communications</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Full Name <span className="text-rose-400">*</span>
                     </label>
                     <div className="relative">
-                      <UserIcon className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+                      <UserIcon className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
                       <input
                         type="text"
                         required
                         value={formData.full_name}
                         onChange={(e) => handleInputChange('full_name', e.target.value)}
                         placeholder="John Doe"
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                        className="w-full pl-9 pr-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Phone / Mobile Number <span className="text-rose-400">*</span>
                     </label>
                     <div className="relative">
-                      <Phone className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+                      <Phone className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
                       <input
                         type="tel"
                         required
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
                         placeholder="+91 98765 43210"
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                        className="w-full pl-9 pr-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Account Email Address
                     </label>
                     <div className="relative opacity-80">
-                      <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+                      <Mail className="w-4 h-4 text-stone-400 absolute left-3 top-3" />
                       <input
                         type="email"
                         disabled
                         value={user?.email || ''}
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/40 border border-slate-850 rounded-xl text-sm text-slate-400 cursor-not-allowed"
+                        className="w-full pl-9 pr-3 py-2.5 bg-rose-50/40 border border-rose-100 rounded-xl text-sm text-stone-500 cursor-not-allowed"
                       />
                     </div>
-                    <span className="text-[11px] text-slate-500 mt-1 block">
+                    <span className="text-[11px] text-stone-400 mt-1 block">
                       Email address is managed securely by Supabase authentication.
                     </span>
                   </div>
@@ -371,18 +371,18 @@ export const Dashboard: React.FC = () => {
               </div>
 
               {/* Section 2: Default Shipping Address */}
-              <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm space-y-5">
-                <div className="flex items-center justify-between border-b border-slate-800/60 pb-3">
+              <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6 backdrop-blur-sm space-y-5">
+                <div className="flex items-center justify-between border-b border-rose-200/60 pb-3">
                   <div className="flex items-center space-x-2">
-                    <MapPin className="w-4 h-4 text-indigo-400" />
-                    <h2 className="font-bold text-sm text-white">Default Shipping Address</h2>
+                    <MapPin className="w-4 h-4 text-rose-300" />
+                    <h2 className="font-bold text-sm text-stone-900">Default Shipping Address</h2>
                   </div>
-                  <span className="text-[11px] text-slate-500">Auto-populates during checkout</span>
+                  <span className="text-[11px] text-stone-400">Auto-populates during checkout</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Address Line 1 (Flat, House no., Building, Street) <span className="text-rose-400">*</span>
                     </label>
                     <input
@@ -391,12 +391,12 @@ export const Dashboard: React.FC = () => {
                       value={formData.address_line1}
                       onChange={(e) => handleInputChange('address_line1', e.target.value)}
                       placeholder="e.g. 102, Blue Horizon Apts, MG Road"
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Address Line 2 (Area, Landmark, Sector)
                     </label>
                     <input
@@ -404,12 +404,12 @@ export const Dashboard: React.FC = () => {
                       value={formData.address_line2}
                       onChange={(e) => handleInputChange('address_line2', e.target.value)}
                       placeholder="e.g. Near City Center Mall"
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       City <span className="text-rose-400">*</span>
                     </label>
                     <input
@@ -418,22 +418,22 @@ export const Dashboard: React.FC = () => {
                       value={formData.city}
                       onChange={(e) => handleInputChange('city', e.target.value)}
                       placeholder="e.g. Mumbai"
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       State <span className="text-rose-400">*</span>
                     </label>
                     <select
                       required
                       value={formData.state}
                       onChange={(e) => handleInputChange('state', e.target.value)}
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all"
                     >
                       {INDIAN_STATES.map((stateName) => (
-                        <option key={stateName} value={stateName} className="bg-slate-900 text-white">
+                        <option key={stateName} value={stateName} className="bg-white text-stone-900">
                           {stateName}
                         </option>
                       ))}
@@ -441,7 +441,7 @@ export const Dashboard: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       PIN Code / Postal Code <span className="text-rose-400">*</span>
                     </label>
                     <input
@@ -450,12 +450,12 @@ export const Dashboard: React.FC = () => {
                       value={formData.postal_code}
                       onChange={(e) => handleInputChange('postal_code', e.target.value)}
                       placeholder="e.g. 400001"
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all placeholder:text-slate-600"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all placeholder:text-stone-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                    <label className="block text-xs font-semibold text-stone-700 mb-1.5">
                       Country
                     </label>
                     <input
@@ -463,16 +463,16 @@ export const Dashboard: React.FC = () => {
                       value={formData.country}
                       onChange={(e) => handleInputChange('country', e.target.value)}
                       placeholder="India"
-                      className="w-full px-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500 transition-all"
+                      className="w-full px-3 py-2.5 bg-rose-50/80 border border-rose-200 rounded-xl text-sm text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/40 focus:border-rose-400 transition-all"
                     />
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-800/60 flex justify-end">
+                <div className="pt-3 border-t border-rose-200/60 flex justify-end">
                   <button
                     type="submit"
                     disabled={savingProfile}
-                    className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-sm font-semibold shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all flex items-center space-x-2 disabled:opacity-50"
+                    className="px-6 py-2.5 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-sm font-semibold shadow-lg shadow-rose-400/20 hover:shadow-rose-400/30 transition-all flex items-center space-x-2 disabled:opacity-50"
                   >
                     {savingProfile ? (
                       <>
@@ -491,23 +491,23 @@ export const Dashboard: React.FC = () => {
             </form>
 
             {/* Backend Verification & Health Panel */}
-            <div className="bg-slate-900/30 border border-slate-800/60 rounded-2xl p-6">
+            <div className="bg-white/50 border border-rose-200/60 rounded-2xl p-6">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Key className="w-3.5 h-3.5 text-indigo-400" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500 flex items-center gap-1.5">
+                  <Key className="w-3.5 h-3.5 text-rose-300" />
                   FastAPI Backend Bridge Verification
                 </h3>
                 <button
                   onClick={testSecureApi}
                   disabled={apiLoading}
-                  className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 flex items-center space-x-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 px-3 py-1.5 rounded-lg transition-all"
+                  className="text-xs font-semibold text-rose-300 hover:text-rose-300 flex items-center space-x-1.5 bg-rose-400/10 hover:bg-rose-400/20 border border-rose-400/20 px-3 py-1.5 rounded-lg transition-all"
                 >
                   {apiLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <RefreshCw className="w-3.5 h-3.5" />}
                   <span>Test Bridge</span>
                 </button>
               </div>
 
-              <p className="text-xs text-slate-400 mb-3">
+              <p className="text-xs text-stone-500 mb-3">
                 Verify authenticated FastAPI communication using the Supabase JWT token.
               </p>
 
@@ -523,7 +523,7 @@ export const Dashboard: React.FC = () => {
                   <div className="font-semibold flex items-center gap-1.5 text-emerald-400 font-sans">
                     <CheckCircle className="w-4 h-4" /> Endpoint Verified: /api/profile/me
                   </div>
-                  <pre className="text-[11px] overflow-auto max-h-32 text-slate-300 mt-1">
+                  <pre className="text-[11px] overflow-auto max-h-32 text-stone-700 mt-1">
                     {JSON.stringify(apiResponse, null, 2)}
                   </pre>
                 </div>
@@ -533,7 +533,7 @@ export const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full text-center text-xs text-slate-600 py-6 border-t border-slate-900">
+      <div className="max-w-6xl mx-auto w-full text-center text-xs text-stone-500 py-6 border-t border-rose-100">
         NovaCart • Secure User Profile and Shipping System
       </div>
     </div>

@@ -29,8 +29,8 @@ export const CategoryProducts: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-slate-400">
-        <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+      <div className="max-w-6xl mx-auto px-6 py-24 flex flex-col items-center text-stone-500">
+        <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
         <span className="text-sm">Loading category...</span>
       </div>
     )
@@ -39,8 +39,8 @@ export const CategoryProducts: React.FC = () => {
   if (notFound || !category) {
     return (
       <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-xl font-bold text-white">Category not found</h2>
-        <Link to="/categories" className="mt-4 inline-flex items-center text-sm text-indigo-400 hover:text-indigo-300">
+        <h2 className="text-xl font-bold text-stone-900">Category not found</h2>
+        <Link to="/categories" className="mt-4 inline-flex items-center text-sm text-rose-300 hover:text-rose-300">
           <ArrowLeft className="w-4 h-4 mr-1" />
           All categories
         </Link>

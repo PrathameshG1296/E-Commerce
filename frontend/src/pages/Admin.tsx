@@ -475,23 +475,23 @@ export const Admin: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-6">
+    <div className="min-h-screen bg-rose-50 text-stone-900 font-sans p-6">
       
       {/* Glow backgrounds */}
-      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-indigo-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-pink-400/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-rose-400/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto py-10 relative z-10">
         
         {/* Navigation Bar */}
-        <div className="flex items-center justify-between border-b border-slate-900 pb-6 mb-8">
+        <div className="flex items-center justify-between border-b border-rose-100 pb-6 mb-8">
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-tr from-purple-500 to-indigo-600 p-2.5 rounded-xl text-white shadow-lg">
+            <div className="bg-gradient-to-tr from-pink-400 to-rose-500 p-2.5 rounded-xl text-stone-900 shadow-lg">
               <Shield className="w-5 h-5" />
             </div>
             <div>
               <span className="font-display font-bold text-xl block">NovaCart Admin Panel</span>
-              <span className="text-[10px] text-purple-400 font-bold uppercase tracking-wider">Catalog & Inventory Systems</span>
+              <span className="text-[10px] text-pink-300 font-bold uppercase tracking-wider">Catalog & Inventory Systems</span>
             </div>
           </div>
           
@@ -499,7 +499,7 @@ export const Admin: React.FC = () => {
             <button 
               onClick={() => setActiveTab('dashboard')}
               className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
-                activeTab === 'dashboard' ? 'bg-slate-900 border border-slate-800 text-white' : 'text-slate-400 hover:text-white'
+                activeTab === 'dashboard' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
               }`}
             >
               Dashboard
@@ -507,7 +507,7 @@ export const Admin: React.FC = () => {
             <button 
               onClick={() => setActiveTab('products')}
               className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
-                activeTab === 'products' ? 'bg-slate-900 border border-slate-800 text-white' : 'text-slate-400 hover:text-white'
+                activeTab === 'products' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
               }`}
             >
               Products List
@@ -515,7 +515,7 @@ export const Admin: React.FC = () => {
             <button 
               onClick={() => setActiveTab('categories')}
               className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
-                activeTab === 'categories' ? 'bg-slate-900 border border-slate-800 text-white' : 'text-slate-400 hover:text-white'
+                activeTab === 'categories' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
               }`}
             >
               Categories List
@@ -523,7 +523,7 @@ export const Admin: React.FC = () => {
             <button 
               onClick={() => setActiveTab('upload')}
               className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
-                activeTab === 'upload' ? 'bg-slate-900 border border-slate-800 text-white' : 'text-slate-400 hover:text-white'
+                activeTab === 'upload' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
               }`}
             >
               Bulk Upload
@@ -531,7 +531,7 @@ export const Admin: React.FC = () => {
             <button 
               onClick={() => { setActiveTab('discounts'); loadDiscounts(); }}
               className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
-                activeTab === 'discounts' ? 'bg-slate-900 border border-slate-800 text-white' : 'text-slate-400 hover:text-white'
+                activeTab === 'discounts' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
               }`}
             >
               Discounts
@@ -570,50 +570,50 @@ export const Admin: React.FC = () => {
         {/* Tab 0: Dashboard */}
         {activeTab === 'dashboard' && dashboard && (
           <div className="space-y-6">
-            <h3 className="font-semibold text-lg text-white">Store Analytics Overview</h3>
+            <h3 className="font-semibold text-lg text-stone-900">Store Analytics Overview</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-6 bg-slate-900/50 border border-slate-800/80 rounded-2xl backdrop-blur-sm">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Revenue</p>
+              <div className="p-6 bg-white/70 border border-rose-200/80 rounded-2xl backdrop-blur-sm">
+                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Total Revenue</p>
                 <p className="text-3xl font-display font-bold text-emerald-400">
                   ₹{dashboard.metrics.total_revenue.toLocaleString()}
                 </p>
               </div>
-              <div className="p-6 bg-slate-900/50 border border-slate-800/80 rounded-2xl backdrop-blur-sm">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Orders</p>
-                <p className="text-3xl font-display font-bold text-white">
+              <div className="p-6 bg-white/70 border border-rose-200/80 rounded-2xl backdrop-blur-sm">
+                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Total Orders</p>
+                <p className="text-3xl font-display font-bold text-stone-900">
                   {dashboard.metrics.total_orders.toLocaleString()}
                 </p>
               </div>
-              <div className="p-6 bg-slate-900/50 border border-slate-800/80 rounded-2xl backdrop-blur-sm">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Users</p>
-                <p className="text-3xl font-display font-bold text-white">
+              <div className="p-6 bg-white/70 border border-rose-200/80 rounded-2xl backdrop-blur-sm">
+                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Total Users</p>
+                <p className="text-3xl font-display font-bold text-stone-900">
                   {dashboard.metrics.total_users.toLocaleString()}
                 </p>
               </div>
-              <div className="p-6 bg-slate-900/50 border border-slate-800/80 rounded-2xl backdrop-blur-sm">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Total Products</p>
-                <p className="text-3xl font-display font-bold text-indigo-400">
+              <div className="p-6 bg-white/70 border border-rose-200/80 rounded-2xl backdrop-blur-sm">
+                <p className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2">Total Products</p>
+                <p className="text-3xl font-display font-bold text-rose-300">
                   {dashboard.metrics.total_products.toLocaleString()}
                 </p>
               </div>
             </div>
 
             <div className="mt-8">
-              <h3 className="font-semibold text-lg text-white mb-4">Recent Sales</h3>
+              <h3 className="font-semibold text-lg text-stone-900 mb-4">Recent Sales</h3>
               {dashboard.recent_orders && dashboard.recent_orders.length > 0 ? (
                 <div className="space-y-3">
                   {dashboard.recent_orders.map((o: any) => (
-                    <div key={o.id} className="p-4 bg-slate-900/40 border border-slate-800 rounded-xl flex items-center justify-between">
+                    <div key={o.id} className="p-4 bg-white/60 border border-rose-200 rounded-xl flex items-center justify-between">
                       <div>
-                        <p className="font-mono text-xs text-slate-400 mb-1">#{o.id.slice(0,8).toUpperCase()}</p>
-                        <p className="font-semibold text-sm text-white">₹{o.total_amount.toLocaleString()}</p>
+                        <p className="font-mono text-xs text-stone-500 mb-1">#{o.id.slice(0,8).toUpperCase()}</p>
+                        <p className="font-semibold text-sm text-stone-900">₹{o.total_amount.toLocaleString()}</p>
                       </div>
                       <div className="text-right">
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border ${o.status === 'paid' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-slate-800 border-slate-700 text-slate-300'}`}>
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded border ${o.status === 'paid' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400' : 'bg-rose-100 border-rose-300 text-stone-700'}`}>
                           {o.status}
                         </span>
-                        <p className="text-[10px] text-slate-500 mt-1">
+                        <p className="text-[10px] text-stone-400 mt-1">
                           {new Date(o.created_at).toLocaleDateString()}
                         </p>
                       </div>
@@ -621,7 +621,7 @@ export const Admin: React.FC = () => {
                   ))}
                 </div>
               ) : (
-                <div className="p-8 text-center bg-slate-900/30 border border-slate-800/50 rounded-2xl text-slate-500 text-sm">
+                <div className="p-8 text-center bg-white/50 border border-rose-200/50 rounded-2xl text-stone-400 text-sm">
                   No recent sales data.
                 </div>
               )}
@@ -635,10 +635,10 @@ export const Admin: React.FC = () => {
             
             {/* Header controls */}
             <div className="flex justify-between items-center">
-              <h3 className="font-semibold text-lg text-white">Product Inventory</h3>
+              <h3 className="font-semibold text-lg text-stone-900">Product Inventory</h3>
               <button
                 onClick={() => setShowProductForm(true)}
-                className="px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-xs font-semibold shadow-lg shadow-indigo-500/20 flex items-center space-x-1.5"
+                className="px-4 py-2.5 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg shadow-rose-400/20 flex items-center space-x-1.5"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Product</span>
@@ -647,14 +647,14 @@ export const Admin: React.FC = () => {
 
             {/* Product form Drawer overlay */}
             {showProductForm && (
-              <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl space-y-6">
+              <div className="fixed inset-0 bg-rose-50/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+                <div className="bg-white border border-rose-200 rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl space-y-6">
                   
-                  <div className="flex justify-between items-center pb-4 border-b border-slate-850">
-                    <h3 className="font-display font-bold text-xl text-white">
+                  <div className="flex justify-between items-center pb-4 border-b border-rose-100">
+                    <h3 className="font-display font-bold text-xl text-stone-900">
                       {editingProduct ? 'Edit E-Commerce Product' : 'Add New E-Commerce Product'}
                     </h3>
-                    <button onClick={resetProductForm} className="text-slate-500 hover:text-white">
+                    <button onClick={resetProductForm} className="text-stone-400 hover:text-stone-900">
                       <X className="w-6 h-6" />
                     </button>
                   </div>
@@ -663,36 +663,36 @@ export const Admin: React.FC = () => {
                     
                     {/* Name */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Product Name</label>
+                      <label className="text-xs font-semibold text-stone-500">Product Name</label>
                       <input
                         type="text"
                         required
                         value={prodName}
                         onChange={(e) => handleNameChange(e.target.value)}
                         placeholder="e.g. Mechanical Keyboard"
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-rose-400"
                       />
                     </div>
 
                     {/* Slug */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Slug URL</label>
+                      <label className="text-xs font-semibold text-stone-500">Slug URL</label>
                       <input
                         type="text"
                         required
                         value={prodSlug}
                         onChange={(e) => setProdSlug(e.target.value)}
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-slate-400 focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-500 focus:outline-none"
                       />
                     </div>
 
                     {/* Category */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Category</label>
+                      <label className="text-xs font-semibold text-stone-500">Category</label>
                       <select
                         value={prodCategory}
                         onChange={(e) => setProdCategory(e.target.value)}
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-slate-300 focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-700 focus:outline-none"
                       >
                         <option value="">Select Category</option>
                         {categories.map(c => (
@@ -703,7 +703,7 @@ export const Admin: React.FC = () => {
 
                     {/* Stock */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Stock Count</label>
+                      <label className="text-xs font-semibold text-stone-500">Stock Count</label>
                       <input
                         type="number"
                         required
@@ -711,13 +711,13 @@ export const Admin: React.FC = () => {
                         value={prodStock}
                         onChange={(e) => setProdStock(e.target.value)}
                         placeholder="0"
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none"
                       />
                     </div>
 
                     {/* Price */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Price (INR)</label>
+                      <label className="text-xs font-semibold text-stone-500">Price (INR)</label>
                       <input
                         type="number"
                         required
@@ -725,26 +725,26 @@ export const Admin: React.FC = () => {
                         value={prodPrice}
                         onChange={(e) => setProdPrice(e.target.value)}
                         placeholder="0.00"
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none"
                       />
                     </div>
 
                     {/* Compare price */}
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Compare-at Price (INR)</label>
+                      <label className="text-xs font-semibold text-stone-500">Compare-at Price (INR)</label>
                       <input
                         type="number"
                         min={0}
                         value={prodComparePrice}
                         onChange={(e) => setProdComparePrice(e.target.value)}
                         placeholder="e.g. Original MSRP price"
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none"
                       />
                     </div>
 
                     {/* Image URL / Upload */}
                     <div className="md:col-span-2 space-y-2">
-                      <label className="text-xs font-semibold text-slate-400 block">Product Image</label>
+                      <label className="text-xs font-semibold text-stone-500 block">Product Image</label>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <input
@@ -752,7 +752,7 @@ export const Admin: React.FC = () => {
                             value={prodImageUrl}
                             onChange={(e) => setProdImageUrl(e.target.value)}
                             placeholder="Direct URL Link"
-                            className="block w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-xs text-white focus:outline-none"
+                            className="block w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-xs text-stone-900 focus:outline-none"
                           />
                         </div>
                         <div className="relative">
@@ -765,7 +765,7 @@ export const Admin: React.FC = () => {
                           />
                           <label
                             htmlFor="image-file"
-                            className="w-full flex items-center justify-center px-4 py-2 bg-slate-950 border border-dashed border-slate-800 hover:border-indigo-500 rounded-xl text-xs text-slate-400 hover:text-white cursor-pointer transition-all h-[42px]"
+                            className="w-full flex items-center justify-center px-4 py-2 bg-rose-50 border border-dashed border-rose-200 hover:border-rose-400 rounded-xl text-xs text-stone-500 hover:text-stone-900 cursor-pointer transition-all h-[42px]"
                           >
                             {uploadingImage ? (
                               <Loader2 className="w-4 h-4 animate-spin mr-2" />
@@ -780,13 +780,13 @@ export const Admin: React.FC = () => {
 
                     {/* Description */}
                     <div className="md:col-span-2 space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Description</label>
+                      <label className="text-xs font-semibold text-stone-500">Description</label>
                       <textarea
                         rows={3}
                         value={prodDesc}
                         onChange={(e) => setProdDesc(e.target.value)}
                         placeholder="Detailed information..."
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none"
                       />
                     </div>
 
@@ -797,26 +797,26 @@ export const Admin: React.FC = () => {
                         id="featured"
                         checked={prodFeatured}
                         onChange={(e) => setProdFeatured(e.target.checked)}
-                        className="h-4 w-4 rounded bg-slate-950 border-slate-800 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded bg-rose-50 border-rose-200 text-rose-500 focus:ring-rose-400"
                       />
-                      <label htmlFor="featured" className="text-xs font-semibold text-slate-300">
+                      <label htmlFor="featured" className="text-xs font-semibold text-stone-700">
                         Feature this product on homepage hero collection.
                       </label>
                     </div>
 
                     {/* Submit buttons */}
-                    <div className="md:col-span-2 pt-4 border-t border-slate-850 flex justify-end space-x-3">
+                    <div className="md:col-span-2 pt-4 border-t border-rose-100 flex justify-end space-x-3">
                       <button
                         type="button"
                         onClick={resetProductForm}
-                        className="px-4 py-2 bg-slate-950 border border-slate-850 hover:bg-slate-850 text-slate-300 rounded-xl text-xs font-semibold transition-all"
+                        className="px-4 py-2 bg-rose-50 border border-rose-100 hover:bg-rose-50 text-stone-700 rounded-xl text-xs font-semibold transition-all"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
                         disabled={uploadingImage}
-                        className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-xs font-semibold shadow-lg disabled:opacity-50"
+                        className="px-4 py-2 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg disabled:opacity-50"
                       >
                         {editingProduct ? 'Save Changes' : 'Create Product'}
                       </button>
@@ -829,21 +829,21 @@ export const Admin: React.FC = () => {
 
             {/* Inventory table */}
             {loading ? (
-              <div className="h-64 flex flex-col items-center justify-center text-slate-500">
-                <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+              <div className="h-64 flex flex-col items-center justify-center text-stone-400">
+                <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
                 <span>Loading inventory...</span>
               </div>
             ) : products.length === 0 ? (
-              <div className="border border-dashed border-slate-800 rounded-2xl p-12 text-center text-slate-500">
+              <div className="border border-dashed border-rose-200 rounded-2xl p-12 text-center text-stone-400">
                 <ShoppingBag className="w-12 h-12 text-slate-700 mx-auto mb-4" />
                 <p>No products in stock. Click Add Product to seed inventory.</p>
               </div>
             ) : (
-              <div className="bg-slate-900/30 border border-slate-900 rounded-2xl overflow-hidden backdrop-blur-sm">
+              <div className="bg-white/50 border border-rose-100 rounded-2xl overflow-hidden backdrop-blur-sm">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="border-b border-slate-900 text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-900/20">
+                      <tr className="border-b border-rose-100 text-xs font-bold uppercase tracking-wider text-stone-500 bg-white/20">
                         <th className="p-4">Product Info</th>
                         <th className="p-4">Category</th>
                         <th className="p-4">Price</th>
@@ -856,10 +856,10 @@ export const Admin: React.FC = () => {
                       {products.map((prod) => {
                         const matchedCat = categories.find(c => c.id === prod.category_id)
                         return (
-                          <tr key={prod.id} className="hover:bg-slate-900/25 transition-colors">
+                          <tr key={prod.id} className="hover:bg-white/25 transition-colors">
                             {/* Title & Slug */}
                             <td className="p-4 flex items-center space-x-3">
-                              <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-950 flex-shrink-0">
+                              <div className="w-10 h-10 rounded-lg overflow-hidden bg-rose-50 flex-shrink-0">
                                 {prod.image_url ? (
                                   <img src={prod.image_url} alt="" className="w-full h-full object-cover" />
                                 ) : (
@@ -867,21 +867,21 @@ export const Admin: React.FC = () => {
                                 )}
                               </div>
                               <div>
-                                <span className="font-semibold text-white block">{prod.name}</span>
-                                <span className="text-[10px] text-slate-500 font-mono">{prod.slug}</span>
+                                <span className="font-semibold text-stone-900 block">{prod.name}</span>
+                                <span className="text-[10px] text-stone-400 font-mono">{prod.slug}</span>
                               </div>
                             </td>
                             {/* Category */}
-                            <td className="p-4 text-slate-400">
+                            <td className="p-4 text-stone-500">
                               {matchedCat?.name || 'Unassigned'}
                             </td>
                             {/* Price */}
-                            <td className="p-4 font-mono font-bold text-white">
+                            <td className="p-4 font-mono font-bold text-stone-900">
                               ₹{prod.price.toLocaleString()}
                             </td>
                             {/* Stock */}
                             <td className="p-4">
-                              <span className={`font-semibold ${prod.stock <= 5 ? 'text-amber-400 font-bold' : 'text-slate-300'}`}>
+                              <span className={`font-semibold ${prod.stock <= 5 ? 'text-amber-400 font-bold' : 'text-stone-700'}`}>
                                 {prod.stock}
                               </span>
                             </td>
@@ -890,7 +890,7 @@ export const Admin: React.FC = () => {
                               {prod.is_featured ? (
                                 <span className="text-emerald-400 flex items-center"><Check className="w-4 h-4 mr-1" /> Yes</span>
                               ) : (
-                                <span className="text-slate-600">No</span>
+                                <span className="text-stone-500">No</span>
                               )}
                             </td>
                             {/* Actions */}
@@ -898,13 +898,13 @@ export const Admin: React.FC = () => {
                               <div className="flex justify-end space-x-2">
                                 <button
                                   onClick={() => startEditProduct(prod)}
-                                  className="p-1.5 bg-slate-950 border border-slate-850 hover:bg-slate-800 text-slate-300 hover:text-white rounded-lg transition-all"
+                                  className="p-1.5 bg-rose-50 border border-rose-100 hover:bg-rose-100 text-stone-700 hover:text-stone-900 rounded-lg transition-all"
                                 >
                                   <Edit2 className="w-3.5 h-3.5" />
                                 </button>
                                 <button
                                   onClick={() => handleDeleteProduct(prod.id)}
-                                  className="p-1.5 bg-slate-950 border border-slate-850 hover:bg-rose-500/10 text-slate-300 hover:text-rose-400 rounded-lg transition-all"
+                                  className="p-1.5 bg-rose-50 border border-rose-100 hover:bg-rose-500/10 text-stone-700 hover:text-rose-400 rounded-lg transition-all"
                                 >
                                   <Trash2 className="w-3.5 h-3.5" />
                                 </button>
@@ -928,10 +928,10 @@ export const Admin: React.FC = () => {
             
             {/* Header controls */}
             <div className="flex justify-between items-center">
-              <h3 className="font-semibold text-lg text-white">Product Categories</h3>
+              <h3 className="font-semibold text-lg text-stone-900">Product Categories</h3>
               <button
                 onClick={() => setShowCategoryForm(true)}
-                className="px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-xs font-semibold shadow-lg flex items-center space-x-1.5"
+                className="px-4 py-2.5 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg flex items-center space-x-1.5"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Category</span>
@@ -940,62 +940,62 @@ export const Admin: React.FC = () => {
 
             {/* Category addition Form modal */}
             {showCategoryForm && (
-              <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-                <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
+              <div className="fixed inset-0 bg-rose-50/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+                <div className="bg-white border border-rose-200 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
                   
-                  <div className="flex justify-between items-center pb-4 border-b border-slate-850">
-                    <h3 className="font-display font-bold text-xl text-white">Add New Category</h3>
-                    <button onClick={resetCategoryForm} className="text-slate-500 hover:text-white">
+                  <div className="flex justify-between items-center pb-4 border-b border-rose-100">
+                    <h3 className="font-display font-bold text-xl text-stone-900">Add New Category</h3>
+                    <button onClick={resetCategoryForm} className="text-stone-400 hover:text-stone-900">
                       <X className="w-6 h-6" />
                     </button>
                   </div>
 
                   <form onSubmit={handleCategorySubmit} className="space-y-4">
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Category Name</label>
+                      <label className="text-xs font-semibold text-stone-500">Category Name</label>
                       <input
                         type="text"
                         required
                         value={catName}
                         onChange={(e) => handleCatNameChange(e.target.value)}
                         placeholder="e.g. Audio Gadgets"
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-rose-400"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Slug</label>
+                      <label className="text-xs font-semibold text-stone-500">Slug</label>
                       <input
                         type="text"
                         required
                         value={catSlug}
                         onChange={(e) => setCatSlug(e.target.value)}
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-slate-400 focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-500 focus:outline-none"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-semibold text-slate-400">Description</label>
+                      <label className="text-xs font-semibold text-stone-500">Description</label>
                       <textarea
                         rows={3}
                         value={catDesc}
                         onChange={(e) => setCatDesc(e.target.value)}
                         placeholder="Brief summary..."
-                        className="block w-full px-3 py-2 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none"
+                        className="block w-full px-3 py-2 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none"
                       />
                     </div>
 
-                    <div className="pt-4 border-t border-slate-850 flex justify-end space-x-3">
+                    <div className="pt-4 border-t border-rose-100 flex justify-end space-x-3">
                       <button
                         type="button"
                         onClick={resetCategoryForm}
-                        className="px-4 py-2 bg-slate-950 border border-slate-850 hover:bg-slate-850 text-slate-300 rounded-xl text-xs font-semibold transition-all"
+                        className="px-4 py-2 bg-rose-50 border border-rose-100 hover:bg-rose-50 text-stone-700 rounded-xl text-xs font-semibold transition-all"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-xs font-semibold shadow-lg"
+                        className="px-4 py-2 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg"
                       >
                         Create Category
                       </button>
@@ -1007,20 +1007,20 @@ export const Admin: React.FC = () => {
 
             {/* Categories Table list */}
             {loading ? (
-              <div className="h-64 flex flex-col items-center justify-center text-slate-500">
-                <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+              <div className="h-64 flex flex-col items-center justify-center text-stone-400">
+                <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
                 <span>Loading categories...</span>
               </div>
             ) : categories.length === 0 ? (
-              <div className="border border-dashed border-slate-800 rounded-2xl p-12 text-center text-slate-500">
+              <div className="border border-dashed border-rose-200 rounded-2xl p-12 text-center text-stone-400">
                 <Tag className="w-12 h-12 text-slate-700 mx-auto mb-4" />
                 <p>No categories found. Add a category to classify products.</p>
               </div>
             ) : (
-              <div className="bg-slate-900/30 border border-slate-900 rounded-2xl overflow-hidden backdrop-blur-sm">
+              <div className="bg-white/50 border border-rose-100 rounded-2xl overflow-hidden backdrop-blur-sm">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-slate-900 text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-900/20">
+                    <tr className="border-b border-rose-100 text-xs font-bold uppercase tracking-wider text-stone-500 bg-white/20">
                       <th className="p-4">Category Name</th>
                       <th className="p-4">Slug</th>
                       <th className="p-4">Description</th>
@@ -1028,14 +1028,14 @@ export const Admin: React.FC = () => {
                   </thead>
                   <tbody className="divide-y divide-slate-900 text-sm">
                     {categories.map((cat) => (
-                      <tr key={cat.id} className="hover:bg-slate-900/25 transition-colors">
-                        <td className="p-4 font-semibold text-white">
+                      <tr key={cat.id} className="hover:bg-white/25 transition-colors">
+                        <td className="p-4 font-semibold text-stone-900">
                           {cat.name}
                         </td>
-                        <td className="p-4 font-mono text-slate-500 text-xs">
+                        <td className="p-4 font-mono text-stone-400 text-xs">
                           {cat.slug}
                         </td>
-                        <td className="p-4 text-slate-400">
+                        <td className="p-4 text-stone-500">
                           {cat.description || 'No description provided.'}
                         </td>
                       </tr>
@@ -1053,8 +1053,8 @@ export const Admin: React.FC = () => {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="font-semibold text-lg text-white">Bulk CSV / Excel Upload</h3>
-                <p className="text-xs text-slate-400 mt-1">Upload a product listing or discount sheet to bulk-import data into your store.</p>
+                <h3 className="font-semibold text-lg text-stone-900">Bulk CSV / Excel Upload</h3>
+                <p className="text-xs text-stone-500 mt-1">Upload a product listing or discount sheet to bulk-import data into your store.</p>
               </div>
             </div>
 
@@ -1064,8 +1064,8 @@ export const Admin: React.FC = () => {
                 onClick={() => { setUploadMode('products'); setUploadResult(null); setUploadFile(null); }}
                 className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 ${
                   uploadMode === 'products'
-                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20'
-                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                    ? 'bg-rose-500 text-white shadow-lg shadow-rose-400/20'
+                    : 'bg-white border border-rose-200 text-stone-500 hover:text-stone-900'
                 }`}
               >
                 <FileSpreadsheet className="w-4 h-4" /> Product Listing
@@ -1075,7 +1075,7 @@ export const Admin: React.FC = () => {
                 className={`px-5 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 ${
                   uploadMode === 'discounts'
                     ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/20'
-                    : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+                    : 'bg-white border border-rose-200 text-stone-500 hover:text-stone-900'
                 }`}
               >
                 <Percent className="w-4 h-4" /> Discount Sheet
@@ -1098,10 +1098,10 @@ export const Admin: React.FC = () => {
               }}
               className={`relative border-2 border-dashed rounded-2xl p-12 text-center transition-all ${
                 dragOver
-                  ? 'border-indigo-500 bg-indigo-500/5'
+                  ? 'border-rose-400 bg-rose-400/5'
                   : uploadFile
                   ? 'border-emerald-500/40 bg-emerald-500/5'
-                  : 'border-slate-800 hover:border-slate-700'
+                  : 'border-rose-200 hover:border-rose-300'
               }`}
             >
               <input
@@ -1124,22 +1124,22 @@ export const Admin: React.FC = () => {
                     <CheckCircle2 className="w-7 h-7 text-emerald-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white">{uploadFile.name}</p>
-                    <p className="text-[10px] text-slate-400 mt-1">
-                      {(uploadFile.size / 1024).toFixed(1)} KB • Ready to upload as <span className="text-indigo-400 font-bold uppercase">{uploadMode}</span>
+                    <p className="text-sm font-semibold text-stone-900">{uploadFile.name}</p>
+                    <p className="text-[10px] text-stone-500 mt-1">
+                      {(uploadFile.size / 1024).toFixed(1)} KB • Ready to upload as <span className="text-rose-300 font-bold uppercase">{uploadMode}</span>
                     </p>
                   </div>
                   <div className="flex items-center justify-center gap-3 pt-2">
                     <button
                       onClick={() => { setUploadFile(null); setUploadResult(null); }}
-                      className="px-4 py-2 bg-slate-950 border border-slate-800 hover:bg-slate-900 text-slate-300 rounded-xl text-xs font-semibold transition-all"
+                      className="px-4 py-2 bg-rose-50 border border-rose-200 hover:bg-white text-stone-700 rounded-xl text-xs font-semibold transition-all"
                     >
                       Change File
                     </button>
                     <button
                       onClick={handleBulkUpload}
                       disabled={uploading}
-                      className="px-5 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-xl text-xs font-semibold shadow-lg shadow-indigo-500/20 flex items-center gap-2 disabled:opacity-50"
+                      className="px-5 py-2 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg shadow-rose-400/20 flex items-center gap-2 disabled:opacity-50"
                     >
                       {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <ArrowUpCircle className="w-4 h-4" />}
                       {uploading ? 'Uploading...' : 'Upload Now'}
@@ -1148,12 +1148,12 @@ export const Admin: React.FC = () => {
                 </div>
               ) : (
                 <label htmlFor="bulk-upload-file" className="cursor-pointer space-y-3 block">
-                  <div className="w-14 h-14 mx-auto rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center">
-                    <Upload className="w-7 h-7 text-slate-500" />
+                  <div className="w-14 h-14 mx-auto rounded-2xl bg-white border border-rose-200 flex items-center justify-center">
+                    <Upload className="w-7 h-7 text-stone-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-slate-300">Drop your {uploadMode === 'products' ? 'Product Listing' : 'Discount'} file here</p>
-                    <p className="text-[10px] text-slate-500 mt-1">Supported: .csv, .xlsx, .xls</p>
+                    <p className="text-sm font-semibold text-stone-700">Drop your {uploadMode === 'products' ? 'Product Listing' : 'Discount'} file here</p>
+                    <p className="text-[10px] text-stone-400 mt-1">Supported: .csv, .xlsx, .xls</p>
                   </div>
                 </label>
               )}
@@ -1161,8 +1161,8 @@ export const Admin: React.FC = () => {
 
             {/* Upload Results */}
             {uploadResult && (
-              <div className="p-6 bg-slate-900/50 border border-slate-800/80 rounded-2xl space-y-4">
-                <h4 className="font-semibold text-sm text-white flex items-center gap-2">
+              <div className="p-6 bg-white/70 border border-rose-200/80 rounded-2xl space-y-4">
+                <h4 className="font-semibold text-sm text-stone-900 flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-400" /> Upload Complete
                 </h4>
                 <div className="grid grid-cols-3 gap-4">
@@ -1170,9 +1170,9 @@ export const Admin: React.FC = () => {
                     <p className="text-2xl font-bold text-emerald-400">{uploadResult.inserted}</p>
                     <p className="text-[10px] uppercase tracking-wider text-emerald-400/70 font-semibold">Inserted</p>
                   </div>
-                  <div className="p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-xl text-center">
-                    <p className="text-2xl font-bold text-indigo-400">{uploadResult.updated}</p>
-                    <p className="text-[10px] uppercase tracking-wider text-indigo-400/70 font-semibold">Updated</p>
+                  <div className="p-4 bg-rose-400/10 border border-rose-400/20 rounded-xl text-center">
+                    <p className="text-2xl font-bold text-rose-300">{uploadResult.updated}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-rose-300/70 font-semibold">Updated</p>
                   </div>
                   <div className="p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl text-center">
                     <p className="text-2xl font-bold text-amber-400">{uploadResult.skipped}</p>
@@ -1182,7 +1182,7 @@ export const Admin: React.FC = () => {
                 {uploadResult.errors.length > 0 && (
                   <div className="space-y-2">
                     <p className="text-xs font-semibold text-rose-400">Errors ({uploadResult.errors.length}):</p>
-                    <div className="max-h-40 overflow-y-auto space-y-1 p-3 bg-slate-950 rounded-xl">
+                    <div className="max-h-40 overflow-y-auto space-y-1 p-3 bg-rose-50 rounded-xl">
                       {uploadResult.errors.map((err, i) => (
                         <p key={i} className="text-[11px] text-rose-300/80 font-mono">{err}</p>
                       ))}
@@ -1199,12 +1199,12 @@ export const Admin: React.FC = () => {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="font-semibold text-lg text-white">Discount Campaigns</h3>
-                <p className="text-xs text-slate-400 mt-1">View and manage all scheduled, active, and expired discount campaigns.</p>
+                <h3 className="font-semibold text-lg text-stone-900">Discount Campaigns</h3>
+                <p className="text-xs text-stone-500 mt-1">View and manage all scheduled, active, and expired discount campaigns.</p>
               </div>
               <button
                 onClick={() => { setActiveTab('upload'); setUploadMode('discounts'); }}
-                className="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-xl text-xs font-semibold shadow-lg shadow-emerald-500/20 flex items-center space-x-1.5"
+                className="px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg shadow-emerald-500/20 flex items-center space-x-1.5"
               >
                 <Plus className="w-4 h-4" />
                 <span>Upload Discounts</span>
@@ -1212,22 +1212,22 @@ export const Admin: React.FC = () => {
             </div>
 
             {loadingDiscounts ? (
-              <div className="h-64 flex flex-col items-center justify-center text-slate-500">
-                <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-4" />
+              <div className="h-64 flex flex-col items-center justify-center text-stone-400">
+                <Loader2 className="w-8 h-8 text-rose-400 animate-spin mb-4" />
                 <span>Loading discount campaigns...</span>
               </div>
             ) : discountRecords.length === 0 ? (
-              <div className="border border-dashed border-slate-800 rounded-2xl p-12 text-center text-slate-500">
+              <div className="border border-dashed border-rose-200 rounded-2xl p-12 text-center text-stone-400">
                 <Percent className="w-12 h-12 text-slate-700 mx-auto mb-4" />
                 <p>No discount campaigns found.</p>
-                <p className="text-xs text-slate-600 mt-1">Upload a discount sheet from the Bulk Upload tab to get started.</p>
+                <p className="text-xs text-stone-500 mt-1">Upload a discount sheet from the Bulk Upload tab to get started.</p>
               </div>
             ) : (
-              <div className="bg-slate-900/30 border border-slate-900 rounded-2xl overflow-hidden backdrop-blur-sm">
+              <div className="bg-white/50 border border-rose-100 rounded-2xl overflow-hidden backdrop-blur-sm">
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="border-b border-slate-900 text-xs font-bold uppercase tracking-wider text-slate-400 bg-slate-900/20">
+                      <tr className="border-b border-rose-100 text-xs font-bold uppercase tracking-wider text-stone-500 bg-white/20">
                         <th className="p-4">Product</th>
                         <th className="p-4">SKU</th>
                         <th className="p-4">Discount</th>
@@ -1241,7 +1241,7 @@ export const Admin: React.FC = () => {
                         const statusColors: Record<string, string> = {
                           active: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
                           upcoming: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
-                          expired: 'bg-slate-800 border-slate-700 text-slate-400',
+                          expired: 'bg-rose-100 border-rose-300 text-stone-500',
                           deactivated: 'bg-rose-500/10 border-rose-500/20 text-rose-400',
                         }
                         const statusIcons: Record<string, React.ReactNode> = {
@@ -1251,24 +1251,24 @@ export const Admin: React.FC = () => {
                           deactivated: <XCircle className="w-3 h-3" />,
                         }
                         return (
-                          <tr key={disc.id} className="hover:bg-slate-900/25 transition-colors">
+                          <tr key={disc.id} className="hover:bg-white/25 transition-colors">
                             <td className="p-4">
-                              <span className="font-semibold text-white">{disc.product_name || 'Unknown Product'}</span>
+                              <span className="font-semibold text-stone-900">{disc.product_name || 'Unknown Product'}</span>
                               {disc.original_price && (
-                                <p className="text-[10px] text-slate-500 mt-0.5">Original: ₹{disc.original_price.toLocaleString()}</p>
+                                <p className="text-[10px] text-stone-400 mt-0.5">Original: ₹{disc.original_price.toLocaleString()}</p>
                               )}
                             </td>
-                            <td className="p-4 font-mono text-xs text-slate-400">{disc.sku || '—'}</td>
+                            <td className="p-4 font-mono text-xs text-stone-500">{disc.sku || '—'}</td>
                             <td className="p-4">
-                              <span className="text-lg font-bold text-indigo-400">{disc.discount_rate}%</span>
+                              <span className="text-lg font-bold text-rose-300">{disc.discount_rate}%</span>
                             </td>
                             <td className="p-4">
-                              <div className="flex items-center gap-1.5 text-[11px] text-slate-400">
-                                <Calendar className="w-3 h-3 text-slate-500" />
+                              <div className="flex items-center gap-1.5 text-[11px] text-stone-500">
+                                <Calendar className="w-3 h-3 text-stone-400" />
                                 {new Date(disc.starts_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                               </div>
-                              <div className="flex items-center gap-1.5 text-[11px] text-slate-500 mt-0.5">
-                                <Calendar className="w-3 h-3 text-slate-600" />
+                              <div className="flex items-center gap-1.5 text-[11px] text-stone-400 mt-0.5">
+                                <Calendar className="w-3 h-3 text-stone-500" />
                                 {new Date(disc.ends_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
                               </div>
                             </td>
@@ -1282,7 +1282,7 @@ export const Admin: React.FC = () => {
                               <button
                                 onClick={() => handleDeleteDiscount(disc.id)}
                                 disabled={deletingDiscountId === disc.id}
-                                className="p-1.5 bg-slate-950 border border-slate-850 hover:bg-rose-500/10 text-slate-300 hover:text-rose-400 rounded-lg transition-all disabled:opacity-50"
+                                className="p-1.5 bg-rose-50 border border-rose-100 hover:bg-rose-500/10 text-stone-700 hover:text-rose-400 rounded-lg transition-all disabled:opacity-50"
                               >
                                 {deletingDiscountId === disc.id ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
                               </button>
@@ -1300,53 +1300,53 @@ export const Admin: React.FC = () => {
 
         {/* Date Range Modal for Discount Upload */}
         {showDateModal && (
-          <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
-            <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
-              <div className="flex justify-between items-center pb-4 border-b border-slate-850">
+          <div className="fixed inset-0 bg-rose-50/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+            <div className="bg-white border border-rose-200 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
+              <div className="flex justify-between items-center pb-4 border-b border-rose-100">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                     <Calendar className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div>
-                    <h3 className="font-display font-bold text-lg text-white">Schedule Discount Period</h3>
-                    <p className="text-[10px] text-slate-400">Set when this discount should be active</p>
+                    <h3 className="font-display font-bold text-lg text-stone-900">Schedule Discount Period</h3>
+                    <p className="text-[10px] text-stone-500">Set when this discount should be active</p>
                   </div>
                 </div>
-                <button onClick={() => setShowDateModal(false)} className="text-slate-500 hover:text-white">
+                <button onClick={() => setShowDateModal(false)} className="text-stone-400 hover:text-stone-900">
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+                  <label className="text-xs font-semibold text-stone-500 flex items-center gap-1.5">
                     <Clock className="w-3 h-3" /> Start Date & Time
                   </label>
                   <input
                     type="datetime-local"
                     value={discountStartDate}
                     onChange={(e) => setDiscountStartDate(e.target.value)}
-                    className="block w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-500"
+                    className="block w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-emerald-500"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+                  <label className="text-xs font-semibold text-stone-500 flex items-center gap-1.5">
                     <Clock className="w-3 h-3" /> End Date & Time
                   </label>
                   <input
                     type="datetime-local"
                     value={discountEndDate}
                     onChange={(e) => setDiscountEndDate(e.target.value)}
-                    className="block w-full px-3 py-2.5 bg-slate-950 border border-slate-850 rounded-xl text-sm text-white focus:outline-none focus:border-emerald-500"
+                    className="block w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-emerald-500"
                   />
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-850 flex justify-end space-x-3">
+              <div className="pt-4 border-t border-rose-100 flex justify-end space-x-3">
                 <button
                   type="button"
                   onClick={() => setShowDateModal(false)}
-                  className="px-4 py-2 bg-slate-950 border border-slate-850 hover:bg-slate-850 text-slate-300 rounded-xl text-xs font-semibold transition-all"
+                  className="px-4 py-2 bg-rose-50 border border-rose-100 hover:bg-rose-50 text-stone-700 rounded-xl text-xs font-semibold transition-all"
                 >
                   Cancel
                 </button>
@@ -1363,7 +1363,7 @@ export const Admin: React.FC = () => {
                     }
                     setShowDateModal(false)
                   }}
-                  className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-xl text-xs font-semibold shadow-lg"
+                  className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg"
                 >
                   Confirm Schedule
                 </button>

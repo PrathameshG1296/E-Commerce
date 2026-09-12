@@ -35,16 +35,16 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
   hideCategoryPills,
 }) => {
   return (
-    <div className="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-6 sticky top-24 backdrop-blur-sm">
-      <div className="flex justify-between items-center pb-4 border-b border-slate-800">
-        <h3 className="font-semibold text-white flex items-center">
-          <SlidersHorizontal className="w-4 h-4 mr-2 text-indigo-400" />
+    <div className="bg-white/60 border border-rose-200/80 rounded-2xl p-6 sticky top-24 backdrop-blur-sm">
+      <div className="flex justify-between items-center pb-4 border-b border-rose-200">
+        <h3 className="font-semibold text-stone-900 flex items-center">
+          <SlidersHorizontal className="w-4 h-4 mr-2 text-rose-300" />
           Filters
         </h3>
         <button
           type="button"
           onClick={onReset}
-          className="text-xs text-slate-500 hover:text-indigo-400 transition-colors"
+          className="text-xs text-stone-400 hover:text-rose-300 transition-colors"
         >
           Reset
         </button>
@@ -52,11 +52,11 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
 
       {!hideCategoryPills && categories.length > 0 && (
         <div className="mt-6 space-y-3">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Category</label>
+          <label className="text-xs font-bold uppercase tracking-wider text-stone-500">Category</label>
           <select
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="block w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-300 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="block w-full px-3 py-2 bg-rose-50 border border-rose-200 text-stone-700 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-rose-400"
           >
             <option value="all">All Categories</option>
             {categories.map((cat) => (
@@ -67,8 +67,8 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
       )}
 
       <div className="mt-6 space-y-3">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Max Price</label>
-        <div className="flex justify-between text-xs text-slate-500 font-mono">
+        <label className="text-xs font-bold uppercase tracking-wider text-stone-500">Max Price</label>
+        <div className="flex justify-between text-xs text-stone-400 font-mono">
           <span>₹0</span>
           <span>₹{priceRange.toLocaleString()}</span>
         </div>
@@ -79,16 +79,16 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
           step={500}
           value={priceRange}
           onChange={(e) => onPriceRangeChange(Number(e.target.value))}
-          className="w-full accent-indigo-500 bg-slate-800 h-1.5 rounded-lg appearance-none cursor-pointer"
+          className="w-full accent-rose-400 bg-rose-100 h-1.5 rounded-lg appearance-none cursor-pointer"
         />
       </div>
 
       <div className="mt-6 space-y-3">
-        <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Sort By</label>
+        <label className="text-xs font-bold uppercase tracking-wider text-stone-500">Sort By</label>
         <select
           value={sortBy}
           onChange={(e) => onSortByChange(e.target.value as ProductFilters['sortBy'])}
-          className="block w-full px-3 py-2 bg-slate-950 border border-slate-800 text-slate-300 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="block w-full px-3 py-2 bg-rose-50 border border-rose-200 text-stone-700 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-rose-400"
         >
           <option value="newest">Newest Releases</option>
           <option value="price_asc">Price: Low to High</option>
@@ -102,9 +102,9 @@ export const CatalogFilters: React.FC<CatalogFiltersProps> = ({
             type="checkbox"
             checked={showFeaturedOnly}
             onChange={(e) => onFeaturedChange(e.target.checked)}
-            className="accent-indigo-500 rounded"
+            className="accent-rose-400 rounded"
           />
-          <span className="text-xs text-slate-300">Featured only</span>
+          <span className="text-xs text-stone-700">Featured only</span>
         </label>
       </div>
 

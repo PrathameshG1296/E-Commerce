@@ -17,7 +17,7 @@ import {
 type AuthView = 'landing' | 'login' | 'signup' | 'signup-otp'
 
 const inputClass =
-  'block w-full pl-11 pr-4 py-3 bg-slate-950/60 border border-slate-800 text-white rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all text-sm'
+  'block w-full pl-11 pr-4 py-3 bg-rose-50/60 border border-rose-200 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400 transition-all text-sm'
 
 export const Auth: React.FC = () => {
   const navigate = useNavigate()
@@ -130,22 +130,22 @@ export const Auth: React.FC = () => {
   }[view]
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-6 relative overflow-hidden font-sans">
-      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-rose-50 flex flex-col items-center justify-center p-6 relative overflow-hidden font-sans">
+      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-rose-400/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-pink-400/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex bg-gradient-to-tr from-indigo-500 to-purple-600 p-3 rounded-2xl shadow-xl shadow-indigo-500/25 mb-4">
-            <Sparkles className="w-8 h-8 text-white" />
+          <Link to="/" className="inline-flex bg-gradient-to-tr from-rose-400 to-purple-600 p-3 rounded-2xl shadow-xl shadow-rose-400/25 mb-4">
+            <Sparkles className="w-8 h-8 text-stone-900" />
           </Link>
-          <h2 className="font-display font-extrabold text-3xl text-white tracking-tight">
+          <h2 className="font-display font-extrabold text-3xl text-stone-900 tracking-tight">
             Welcome to NovaCart
           </h2>
-          <p className="mt-2 text-sm text-slate-400">{subtitle}</p>
+          <p className="mt-2 text-sm text-stone-500">{subtitle}</p>
         </div>
 
-        <div className="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-8 backdrop-blur-md shadow-2xl">
+        <div className="bg-white/60 border border-rose-200/80 rounded-3xl p-8 backdrop-blur-md shadow-2xl">
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-medium">
               {error}
@@ -163,18 +163,18 @@ export const Auth: React.FC = () => {
               <button
                 type="button"
                 onClick={() => switchView('login')}
-                className="w-full py-3.5 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center space-x-2 group"
+                className="w-full py-3.5 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center space-x-2 group"
               >
                 <LogIn className="w-5 h-5" />
                 <span>Login</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
-              <p className="text-center text-xs text-slate-500">
+              <p className="text-center text-xs text-stone-400">
                 New here?{' '}
                 <button
                   type="button"
                   onClick={() => switchView('signup')}
-                  className="text-indigo-400 hover:text-indigo-300 font-medium"
+                  className="text-rose-300 hover:text-rose-300 font-medium"
                 >
                   Create an account
                 </button>
@@ -185,11 +185,11 @@ export const Auth: React.FC = () => {
           {view === 'login' && (
             <form onSubmit={handleLogin} className="space-y-5">
               <div>
-                <label htmlFor="login-email" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="login-email" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Email
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Mail className="w-5 h-5" />
                   </div>
                   <input
@@ -205,11 +205,11 @@ export const Auth: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="login-password" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="login-password" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Lock className="w-5 h-5" />
                   </div>
                   <input
@@ -228,17 +228,17 @@ export const Auth: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center disabled:opacity-50"
+                className="w-full py-3 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center disabled:opacity-50"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Login'}
               </button>
 
-              <p className="text-center text-xs text-slate-400">
+              <p className="text-center text-xs text-stone-500">
                 Don&apos;t have an account?{' '}
                 <button
                   type="button"
                   onClick={() => switchView('signup')}
-                  className="text-indigo-400 hover:text-indigo-300 font-medium"
+                  className="text-rose-300 hover:text-rose-300 font-medium"
                 >
                   Create account
                 </button>
@@ -247,7 +247,7 @@ export const Auth: React.FC = () => {
               <button
                 type="button"
                 onClick={() => switchView('landing')}
-                className="w-full text-xs text-slate-500 hover:text-slate-300"
+                className="w-full text-xs text-stone-400 hover:text-stone-700"
               >
                 ← Back
               </button>
@@ -257,11 +257,11 @@ export const Auth: React.FC = () => {
           {view === 'signup' && (
             <form onSubmit={handleSignUp} className="space-y-4">
               <div>
-                <label htmlFor="signup-name" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="signup-name" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Full Name
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <User className="w-5 h-5" />
                   </div>
                   <input
@@ -277,11 +277,11 @@ export const Auth: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="signup-mobile" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="signup-mobile" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Mobile Number
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Phone className="w-5 h-5" />
                   </div>
                   <input
@@ -297,11 +297,11 @@ export const Auth: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="signup-email" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="signup-email" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Email
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Mail className="w-5 h-5" />
                   </div>
                   <input
@@ -317,11 +317,11 @@ export const Auth: React.FC = () => {
               </div>
 
               <div>
-                <label htmlFor="signup-password" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="signup-password" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Password
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Lock className="w-5 h-5" />
                   </div>
                   <input
@@ -340,17 +340,17 @@ export const Auth: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center disabled:opacity-50"
+                className="w-full py-3 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center disabled:opacity-50"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Create Account & Send OTP'}
               </button>
 
-              <p className="text-center text-xs text-slate-400">
+              <p className="text-center text-xs text-stone-500">
                 Already have an account?{' '}
                 <button
                   type="button"
                   onClick={() => switchView('login')}
-                  className="text-indigo-400 hover:text-indigo-300 font-medium"
+                  className="text-rose-300 hover:text-rose-300 font-medium"
                 >
                   Login
                 </button>
@@ -359,7 +359,7 @@ export const Auth: React.FC = () => {
               <button
                 type="button"
                 onClick={() => switchView('landing')}
-                className="w-full text-xs text-slate-500 hover:text-slate-300"
+                className="w-full text-xs text-stone-400 hover:text-stone-700"
               >
                 ← Back
               </button>
@@ -368,16 +368,16 @@ export const Auth: React.FC = () => {
 
           {view === 'signup-otp' && (
             <form onSubmit={handleVerifySignupOtp} className="space-y-5">
-              <p className="text-xs text-slate-400 text-center">
-                OTP sent to <span className="text-slate-200 font-medium">{email}</span>
+              <p className="text-xs text-stone-500 text-center">
+                OTP sent to <span className="text-stone-800 font-medium">{email}</span>
               </p>
 
               <div>
-                <label htmlFor="signup-otp" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                <label htmlFor="signup-otp" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
                   Email OTP
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
                     <Key className="w-5 h-5" />
                   </div>
                   <input
@@ -396,7 +396,7 @@ export const Auth: React.FC = () => {
               <button
                 type="submit"
                 disabled={loading || otp.length < 6}
-                className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white text-sm font-semibold rounded-xl transition-all shadow-lg shadow-indigo-500/20 flex items-center justify-center disabled:opacity-50"
+                className="w-full py-3 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center disabled:opacity-50"
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify & Register'}
               </button>
@@ -405,7 +405,7 @@ export const Auth: React.FC = () => {
                 type="button"
                 onClick={handleResendOtp}
                 disabled={loading}
-                className="w-full py-2.5 px-4 bg-slate-950/40 border border-slate-800/80 text-slate-300 hover:bg-slate-800/40 text-xs font-semibold rounded-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                className="w-full py-2.5 px-4 bg-rose-50/40 border border-rose-200/80 text-stone-700 hover:bg-rose-100/40 text-xs font-semibold rounded-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 <span>Resend OTP</span>
@@ -414,7 +414,7 @@ export const Auth: React.FC = () => {
               <button
                 type="button"
                 onClick={() => switchView('signup')}
-                className="w-full text-xs text-slate-500 hover:text-slate-300"
+                className="w-full text-xs text-stone-400 hover:text-stone-700"
               >
                 ← Back to sign up
               </button>
