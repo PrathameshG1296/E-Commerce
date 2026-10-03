@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { fetchOrderById } from '../lib/cartApi'
+import { trackPurchase } from '../lib/analytics'
 import type { Order } from '../types/cart'
 import { CheckCircle, Loader2, Package, ArrowRight } from 'lucide-react'
 
@@ -16,7 +17,12 @@ export const OrderSuccess: React.FC = () => {
     if (!orderId) return
     getAuthHeaders()
       .then((headers) => fetchOrderById(orderId, headers))
-      .then(setOrder)
+      .then((data) => {
+        setOrder(data)
+        if (data) {
+          trackPurchase(data.id, data.total_amount, data.order_items?.length || 0)
+        }
+      })
       .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load order'))
       .finally(() => setLoading(false))
   }, [orderId, getAuthHeaders])

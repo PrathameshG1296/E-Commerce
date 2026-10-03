@@ -76,6 +76,8 @@ CREATE TABLE IF NOT EXISTS public.orders (
     status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'shipped', 'delivered', 'cancelled', 'failed')),
     total_amount NUMERIC(10, 2) NOT NULL CHECK (total_amount >= 0),
     shipping_address JSONB NOT NULL,
+    tracking_number TEXT,
+    carrier TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

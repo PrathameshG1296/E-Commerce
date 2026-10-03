@@ -50,8 +50,11 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
 }
 
 export async function fetchCategoryBySlug(slug: string): Promise<Category | null> {
-  const categories = await fetchCategories()
-  return categories.find((c) => c.slug === slug) ?? null
+  try {
+    return await apiFetch<Category>(`/api/categories/${slug}`)
+  } catch {
+    return null
+  }
 }
 
 export async function fetchBrands(): Promise<Brand[]> {

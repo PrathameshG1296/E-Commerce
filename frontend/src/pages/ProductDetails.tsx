@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { fetchProductBySlug, trackProductView } from '../lib/api'
-import { getSessionId } from '../lib/session'
+import { fetchProductBySlug } from '../lib/api'
+import { trackProductView, trackAddToCart } from '../lib/analytics'
+import { getSessionId as _getSessionId } from '../lib/session'  // kept for tree-shaking safety
 import { useAuth } from '../context/AuthContext'
 import { useCart } from '../context/CartContext'
 import type { Product } from '../types/catalog'
@@ -30,7 +31,7 @@ export const ProductDetails: React.FC = () => {
       const data = await fetchProductBySlug(slug)
       setProduct(data)
       if (data.image_url) setActiveImage(data.image_url)
-      trackProductView(data.id, getSessionId()).catch(() => {})
+      trackProductView(data.id, data.name)
     } catch (err) {
       setProduct(null)
       setError(err instanceof Error ? err.message : 'Failed to load product.')
@@ -62,6 +63,7 @@ export const ProductDetails: React.FC = () => {
       setCartError(result.error)
       return
     }
+    trackAddToCart(product.id, quantity, product.price, product.name)
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)
   }

@@ -14,14 +14,14 @@ import {
   LogIn,
 } from 'lucide-react'
 
-type AuthView = 'landing' | 'login' | 'signup' | 'signup-otp'
+type AuthView = 'landing' | 'login' | 'signup' | 'signup-verify'
 
 const inputClass =
   'block w-full pl-11 pr-4 py-3 bg-rose-50/60 border border-rose-200 text-stone-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400 transition-all text-sm'
 
 export const Auth: React.FC = () => {
   const navigate = useNavigate()
-  const { user, signInWithPassword, signUp, verifySignupOtp, resendSignupOtp } = useAuth()
+  const { user, signInWithPassword, signUp, resendVerificationEmail } = useAuth()
 
   const [view, setView] = useState<AuthView>('landing')
 
@@ -29,7 +29,6 @@ export const Auth: React.FC = () => {
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
   const [mobile, setMobile] = useState('')
-  const [otp, setOtp] = useState('')
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -80,45 +79,30 @@ export const Auth: React.FC = () => {
     setLoading(true)
     resetMessages()
 
-    const { error: signUpError, needsOtp } = await signUp({ name, mobile, email, password })
+    const { error: signUpError, needsEmailConfirmation } = await signUp({ name, mobile, email, password })
 
     setLoading(false)
     if (signUpError) {
       setError(signUpError.message || 'Sign up failed. Please try again.')
-    } else if (needsOtp) {
-      setSuccessMessage('We sent a 6-digit OTP to your email. Enter it below to complete registration.')
-      setView('signup-otp')
+    } else if (needsEmailConfirmation) {
+      setSuccessMessage('We sent a verification link to your email. Please check your inbox and click the link to activate your account.')
+      setView('signup-verify')
     } else {
       setSuccessMessage('Account created successfully! Redirecting to your dashboard...')
     }
   }
 
-  const handleVerifySignupOtp = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleResendLink = async () => {
     setLoading(true)
     resetMessages()
 
-    const { error: verifyError } = await verifySignupOtp(email, otp, { name, mobile })
-
-    setLoading(false)
-    if (verifyError) {
-      setError(verifyError.message || 'Invalid or expired OTP. Please try again.')
-    } else {
-      setSuccessMessage('Account created successfully!')
-    }
-  }
-
-  const handleResendOtp = async () => {
-    setLoading(true)
-    resetMessages()
-
-    const { error: resendError } = await resendSignupOtp(email)
+    const { error: resendError } = await resendVerificationEmail(email)
 
     setLoading(false)
     if (resendError) {
-      setError(resendError.message || 'Could not resend OTP.')
+      setError(resendError.message || 'Could not resend verification email.')
     } else {
-      setSuccessMessage('A new OTP has been sent to your email.')
+      setSuccessMessage('A new verification link has been sent to your email.')
     }
   }
 
@@ -126,7 +110,7 @@ export const Auth: React.FC = () => {
     landing: 'Sign in to shop, track orders, and manage your account.',
     login: 'Welcome back! Enter your credentials to continue.',
     signup: 'Create your NovaCart account in a few steps.',
-    'signup-otp': 'Verify your email to activate your account.',
+    'signup-verify': 'Check your email to activate your account.',
   }[view]
 
   return (
@@ -342,7 +326,7 @@ export const Auth: React.FC = () => {
                 disabled={loading}
                 className="w-full py-3 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center disabled:opacity-50"
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Create Account & Send OTP'}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Create Account'}
               </button>
 
               <p className="text-center text-xs text-stone-500">
@@ -366,59 +350,45 @@ export const Auth: React.FC = () => {
             </form>
           )}
 
-          {view === 'signup-otp' && (
-            <form onSubmit={handleVerifySignupOtp} className="space-y-5">
-              <p className="text-xs text-stone-500 text-center">
-                OTP sent to <span className="text-stone-800 font-medium">{email}</span>
-              </p>
-
-              <div>
-                <label htmlFor="signup-otp" className="block text-xs font-semibold text-stone-700 uppercase tracking-wider mb-2">
-                  Email OTP
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
-                    <Key className="w-5 h-5" />
-                  </div>
-                  <input
-                    type="text"
-                    id="signup-otp"
-                    required
-                    maxLength={6}
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                    placeholder="123456"
-                    className={`${inputClass} tracking-[0.25em] text-center font-mono font-bold text-lg pl-4`}
-                  />
+          {view === 'signup-verify' && (
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Mail className="w-8 h-8 text-rose-500" />
                 </div>
+                <h3 className="text-lg font-bold text-stone-800 mb-2">Check your email</h3>
+                <p className="text-sm text-stone-500">
+                  We've sent a verification link to <span className="text-stone-800 font-medium">{email}</span>. 
+                  Please click the link in that email to activate your account.
+                </p>
               </div>
 
-              <button
-                type="submit"
-                disabled={loading || otp.length < 6}
-                className="w-full py-3 px-4 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 text-sm font-semibold rounded-xl transition-all shadow-lg shadow-rose-400/20 flex items-center justify-center disabled:opacity-50"
-              >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify & Register'}
-              </button>
+              <div className="pt-4 space-y-3">
+                <button
+                  type="button"
+                  onClick={handleResendLink}
+                  disabled={loading}
+                  className="w-full py-2.5 px-4 bg-rose-50/40 border border-rose-200/80 text-stone-700 hover:bg-rose-100/40 text-sm font-semibold rounded-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
+                >
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <RefreshCw className="w-4 h-4" />
+                      <span>Resend Verification Email</span>
+                    </>
+                  )}
+                </button>
 
-              <button
-                type="button"
-                onClick={handleResendOtp}
-                disabled={loading}
-                className="w-full py-2.5 px-4 bg-rose-50/40 border border-rose-200/80 text-stone-700 hover:bg-rose-100/40 text-xs font-semibold rounded-xl transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
-              >
-                <RefreshCw className="w-3.5 h-3.5" />
-                <span>Resend OTP</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => switchView('signup')}
-                className="w-full text-xs text-stone-400 hover:text-stone-700"
-              >
-                ← Back to sign up
-              </button>
-            </form>
+                <button
+                  type="button"
+                  onClick={() => switchView('login')}
+                  className="w-full text-xs text-stone-400 hover:text-stone-700 mt-4"
+                >
+                  ← Back to Login
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

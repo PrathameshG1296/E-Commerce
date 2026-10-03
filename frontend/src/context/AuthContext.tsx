@@ -25,7 +25,7 @@ export interface SignUpData {
 
 interface SignUpResult {
   error: Error | null
-  needsOtp: boolean
+  needsEmailConfirmation: boolean
 }
 
 interface AuthContextType {
@@ -35,8 +35,7 @@ interface AuthContextType {
   loading: boolean
   signInWithPassword: (email: string, password: string) => Promise<{ error: Error | null }>
   signUp: (data: SignUpData) => Promise<SignUpResult>
-  verifySignupOtp: (email: string, token: string, profileData: Pick<SignUpData, 'name' | 'mobile'>) => Promise<{ error: Error | null }>
-  resendSignupOtp: (email: string) => Promise<{ error: Error | null }>
+  resendVerificationEmail: (email: string) => Promise<{ error: Error | null }>
   signOut: () => Promise<{ error: Error | null }>
   getAuthHeaders: () => Promise<Record<string, string>>
   updateProfile: (updates: Partial<Profile>) => Promise<{ data: Profile | null; error: Error | null }>
@@ -144,64 +143,39 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error('Supabase signUp error:', error)
-        return { error: new Error(parseSignUpError(error)), needsOtp: false }
+        return { error: new Error(parseSignUpError(error)), needsEmailConfirmation: false }
       }
 
-      // Confirm email OFF → user gets a session immediately (no OTP step)
+      // Check if user already exists (when Email Enumeration Protection is ON)
+      if (data.user && data.user.identities && data.user.identities.length === 0) {
+        return {
+          error: new Error('This email is already registered. Try logging in instead.'),
+          needsEmailConfirmation: false,
+        }
+      }
+
+      // Confirm email OFF → user gets a session immediately (no verification step)
       if (data.session) {
-        return { error: null, needsOtp: false }
+        return { error: null, needsEmailConfirmation: false }
       }
 
-      // Confirm email ON → OTP sent, wait for verification
+      // Confirm email ON → Verification Link sent, wait for verification
       if (data.user) {
-        return { error: null, needsOtp: true }
+        return { error: null, needsEmailConfirmation: true }
       }
 
-      return { error: null, needsOtp: false }
+      return { error: null, needsEmailConfirmation: false }
     } catch (err) {
       console.error('Supabase signUp exception:', err)
       const authErr = err as { message?: string; status?: number; name?: string }
       return {
         error: new Error(parseSignUpError(authErr)),
-        needsOtp: false,
+        needsEmailConfirmation: false,
       }
     }
   }
 
-  const verifySignupOtp = async (
-    email: string,
-    token: string,
-    profileData: Pick<SignUpData, 'name' | 'mobile'>
-  ) => {
-    try {
-      const { data, error } = await supabase.auth.verifyOtp({
-        email,
-        token,
-        type: 'signup',
-      })
-
-      if (error) {
-        return { error: new Error(error.message) }
-      }
-
-      if (data.user) {
-        await supabase
-          .from('profiles')
-          .update({
-            full_name: profileData.name,
-            phone: profileData.mobile,
-          })
-          .eq('id', data.user.id)
-        await fetchProfile(data.user.id)
-      }
-
-      return { error: null }
-    } catch (err) {
-      return { error: err instanceof Error ? err : new Error('OTP verification failed') }
-    }
-  }
-
-  const resendSignupOtp = async (email: string) => {
+  const resendVerificationEmail = async (email: string) => {
     try {
       const { error } = await supabase.auth.resend({
         type: 'signup',
@@ -209,7 +183,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       })
       return { error: error ? new Error(error.message) : null }
     } catch (err) {
-      return { error: err instanceof Error ? err : new Error('Failed to resend OTP') }
+      return { error: err instanceof Error ? err : new Error('Failed to resend verification email') }
     }
   }
 
@@ -282,8 +256,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loading,
         signInWithPassword,
         signUp,
-        verifySignupOtp,
-        resendSignupOtp,
+        resendVerificationEmail,
         signOut,
         getAuthHeaders,
         updateProfile,

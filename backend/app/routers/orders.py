@@ -2,12 +2,13 @@ import json
 from typing import Any, List, Optional
 
 import razorpay
-from fastapi import APIRouter, Depends, HTTPException, status, Request, Header
+from fastapi import APIRouter, Depends, HTTPException, status, Request, Header, BackgroundTasks
 from pydantic import BaseModel, Field
 
-from app.auth import CurrentUser, get_current_user
+from app.auth import CurrentUser, get_current_user, get_current_admin
 from app.config import settings
 from app.db import get_supabase_admin
+from app.notifications import send_order_confirmation_email, send_order_status_update_email
 
 router = APIRouter(prefix="/api/orders", tags=["Orders"])
 
@@ -53,6 +54,8 @@ class OrderResponse(BaseModel):
     razorpay_payment_id: Optional[str] = None
     status: str
     total_amount: float
+    tracking_number: Optional[str] = None
+    carrier: Optional[str] = None
     shipping_address: dict[str, Any]
     created_at: Optional[str] = None
     order_items: List[OrderItemResponse] = []
@@ -350,8 +353,16 @@ async def verify_payment(
             detail=f"Payment verification failed: {str(e)}",
         )
 
+def _get_user_email(user_id: str) -> str:
+    try:
+        user = supabase.auth.admin.get_user_by_id(user_id)
+        return user.user.email
+    except Exception:
+        return f"customer_{user_id[:8]}@example.com"
+
+
 @router.post("/webhook")
-async def razorpay_webhook(request: Request):
+async def razorpay_webhook(request: Request, background_tasks: BackgroundTasks):
     """
     Handles asynchronous payment events from Razorpay (like order.paid).
     """
@@ -367,7 +378,8 @@ async def razorpay_webhook(request: Request):
 
     try:
         # Verify the signature
-        razorpay_client.utility.verify_webhook_signature(
+        client = _get_razorpay_client()
+        client.utility.verify_webhook_signature(
             raw_body.decode('utf-8'), 
             signature, 
             settings.RAZORPAY_WEBHOOK_SECRET
@@ -404,6 +416,15 @@ async def razorpay_webhook(request: Request):
             if order.get("status") == "pending":
                 # Update status
                 supabase.table("orders").update({"status": "paid"}).eq("id", order["id"]).execute()
+                
+                # Send email notification
+                user_email = _get_user_email(order.get("user_id"))
+                background_tasks.add_task(
+                    send_order_confirmation_email,
+                    user_email=user_email,
+                    order_id=order["id"],
+                    total_amount=order.get("total_amount", 0)
+                )
 
                 # Process inventory (decrement stock)
                 items_res = supabase.table("order_items").select("*").eq("order_id", order["id"]).execute()
@@ -435,3 +456,68 @@ async def razorpay_webhook(request: Request):
         print(f"Webhook error: {e}")
         # Return 200 anyway so Razorpay doesn't keep retrying for non-critical code bugs here
         return {"status": "error", "message": str(e)}
+
+
+# ── Admin: Update Order Status ─────────────────────────────────────────────────
+
+ALLOWED_STATUSES = {"pending", "paid", "shipped", "delivered", "cancelled", "failed"}
+
+# Terminal statuses: once reached, no further transitions allowed
+TERMINAL_STATUSES = {"delivered", "cancelled", "failed"}
+
+
+class UpdateOrderStatusRequest(BaseModel):
+    status: str
+    tracking_number: Optional[str] = None
+    carrier: Optional[str] = None
+
+
+@router.patch("/{order_id}/status", response_model=OrderResponse)
+async def admin_update_order_status(
+    order_id: str,
+    body: UpdateOrderStatusRequest,
+    background_tasks: BackgroundTasks,
+    current_admin: CurrentUser = Depends(get_current_admin),
+):
+    """Admin-only: change an order's fulfillment status."""
+    new_status = body.status.strip().lower()
+    if new_status not in ALLOWED_STATUSES:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail=f"Invalid status '{new_status}'. Allowed: {', '.join(sorted(ALLOWED_STATUSES))}",
+        )
+
+    order_res = supabase.table("orders").select("status").eq("id", order_id).execute()
+    if not order_res.data:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
+
+    current_status = order_res.data[0].get("status", "")
+
+    if current_status == new_status:
+        return _order_with_items(order_id)
+
+    if current_status in TERMINAL_STATUSES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Order is already '{current_status}' and cannot be changed",
+        )
+
+    update_data = {"status": new_status}
+    if body.tracking_number is not None:
+        update_data["tracking_number"] = body.tracking_number.strip()
+    if body.carrier is not None:
+        update_data["carrier"] = body.carrier.strip()
+
+    supabase.table("orders").update(update_data).eq("id", order_id).execute()
+
+    user_id = order_res.data[0].get("user_id")
+    if user_id:
+        user_email = _get_user_email(user_id)
+        background_tasks.add_task(
+            send_order_status_update_email,
+            user_email=user_email,
+            order_id=order_id,
+            new_status=new_status
+        )
+
+    return _order_with_items(order_id)

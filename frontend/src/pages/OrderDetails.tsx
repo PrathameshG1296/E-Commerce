@@ -261,6 +261,29 @@ export const OrderDetails: React.FC = () => {
                 )
               })}
             </div>
+
+            {/* Tracking Info */}
+            {(order.tracking_number || order.carrier) && (
+              <div className="mt-8 p-4 bg-cyan-500/10 border border-cyan-500/20 rounded-xl flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-500 flex items-center justify-center">
+                    <Truck className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-stone-900 text-sm">Tracking Information</p>
+                    <p className="text-xs text-stone-500">
+                      Shipped via <span className="font-bold text-stone-700">{order.carrier || 'Standard Courier'}</span>
+                    </p>
+                  </div>
+                </div>
+                {order.tracking_number && (
+                  <div className="text-right">
+                    <p className="text-[10px] uppercase font-bold text-stone-500 tracking-wider">Tracking Number</p>
+                    <p className="font-mono font-bold text-stone-900 text-sm">{order.tracking_number}</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
       </div>

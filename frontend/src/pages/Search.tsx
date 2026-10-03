@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ProductCatalog } from '../components/catalog/ProductCatalog'
+import { trackSearch } from '../lib/analytics'
 
 export const Search: React.FC = () => {
   const [params] = useSearchParams()
   const query = params.get('q') ?? ''
+
+  useEffect(() => {
+    if (query) {
+      trackSearch(query)
+    }
+  }, [query])
 
   return (
     <ProductCatalog

@@ -43,6 +43,8 @@ export interface Order {
   razorpay_payment_id: string | null
   status: string
   total_amount: number
+  tracking_number?: string | null
+  carrier?: string | null
   shipping_address: ShippingAddress
   created_at?: string | null
   order_items?: OrderItem[]

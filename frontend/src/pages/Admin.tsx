@@ -5,7 +5,7 @@ import { API_BASE_URL } from '../lib/api'
 import {
   Plus, Edit2, Trash2, Tag, ShoppingBag, Loader2, X, Check, Upload,
   AlertCircle, Shield, FileSpreadsheet, Percent, Calendar, Clock,
-  CheckCircle2, XCircle, ArrowUpCircle,
+  CheckCircle2, XCircle, ArrowUpCircle, Package, RefreshCw,
 } from 'lucide-react'
 
 interface Category {
@@ -50,6 +50,22 @@ interface DiscountRecord {
   status: string | null
 }
 
+interface AdminOrder {
+  id: string
+  user_id: string | null
+  status: string
+  total_amount: number
+  shipping_address: Record<string, string>
+  created_at: string | null
+  razorpay_payment_id: string | null
+  order_items: Array<{
+    id: string
+    quantity: number
+    price: number
+    products: { name: string; image_url: string | null } | null
+  }>
+}
+
 export const Admin: React.FC = () => {
   const { getAuthHeaders } = useAuth()
 
@@ -61,7 +77,7 @@ export const Admin: React.FC = () => {
   const [isOffline, setIsOffline] = useState(false)
 
   // Active Tab
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'products' | 'categories' | 'upload' | 'discounts'>('dashboard')
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'products' | 'categories' | 'upload' | 'discounts' | 'orders'>('dashboard')
 
   // Bulk Upload state
   const [uploadMode, setUploadMode] = useState<'products' | 'discounts'>('products')
@@ -78,10 +94,19 @@ export const Admin: React.FC = () => {
   const [loadingDiscounts, setLoadingDiscounts] = useState(false)
   const [deletingDiscountId, setDeletingDiscountId] = useState<string | null>(null)
 
+  // Orders tab state
+  const [adminOrders, setAdminOrders] = useState<AdminOrder[]>([])
+  const [loadingOrders, setLoadingOrders] = useState(false)
+  const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null)
+  const [shippingModal, setShippingModal] = useState<{ orderId: string } | null>(null)
+  const [shippingTrackingNumber, setShippingTrackingNumber] = useState('')
+  const [shippingCarrier, setShippingCarrier] = useState('')
+
   // Forms Visibility & Edit state
   const [showProductForm, setShowProductForm] = useState(false)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [showCategoryForm, setShowCategoryForm] = useState(false)
+  const [editingCategory, setEditingCategory] = useState<Category | null>(null)
 
   // Product Form Fields
   const [prodName, setProdName] = useState('')
@@ -242,7 +267,7 @@ export const Admin: React.FC = () => {
       const headers = await getAuthHeaders()
       const url = editingProduct 
         ? `${API_BASE_URL}/api/products/${editingProduct.id}` 
-        : '${API_BASE_URL}/api/products'
+        : `${API_BASE_URL}/api/products`
       
       const response = await fetch(url, {
         method: editingProduct ? 'PUT' : 'POST',
@@ -276,31 +301,70 @@ export const Admin: React.FC = () => {
     }
 
     if (isOffline) {
-      const newCat = { ...payload, id: Math.random().toString() }
-      setCategories([...categories, newCat])
-      setFormSuccess('Category added successfully (local sandbox mode).')
+      if (editingCategory) {
+        setCategories(categories.map(c => c.id === editingCategory.id ? { ...c, ...payload } : c))
+        setFormSuccess('Category updated successfully (local sandbox mode).')
+      } else {
+        const newCat = { ...payload, id: Math.random().toString() }
+        setCategories([...categories, newCat])
+        setFormSuccess('Category added successfully (local sandbox mode).')
+      }
       resetCategoryForm()
       return
     }
 
     try {
       const headers = await getAuthHeaders()
-      const response = await fetch('${API_BASE_URL}/api/categories', {
-        method: 'POST',
+      const url = editingCategory
+        ? `${API_BASE_URL}/api/categories/${editingCategory.id}`
+        : `${API_BASE_URL}/api/categories`
+
+      const response = await fetch(url, {
+        method: editingCategory ? 'PATCH' : 'POST',
         headers: headers,
         body: JSON.stringify(payload)
       })
 
       if (!response.ok) {
-        const errData = await response.json()
+        const errData = await response.json().catch(() => ({}))
         throw new Error(errData.detail || 'Failed to save category.')
       }
 
-      setFormSuccess('Category added successfully!')
+      setFormSuccess(editingCategory ? 'Category updated successfully!' : 'Category added successfully!')
       resetCategoryForm()
       fetchData()
     } catch (err: any) {
       setFormError(err.message || 'Database error occurred while saving category.')
+    }
+  }
+
+  const handleDeleteCategory = async (id: string) => {
+    if (!window.confirm('Are you sure you want to delete this category? Products in this category will be unassigned.')) return
+    setFormError(null)
+    setFormSuccess(null)
+
+    if (isOffline) {
+      setCategories(categories.filter(c => c.id !== id))
+      setFormSuccess('Category deleted successfully (local sandbox mode).')
+      return
+    }
+
+    try {
+      const headers = await getAuthHeaders()
+      const response = await fetch(`${API_BASE_URL}/api/categories/${id}`, {
+        method: 'DELETE',
+        headers: headers
+      })
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}))
+        throw new Error(errData.detail || 'Failed to delete category.')
+      }
+
+      setFormSuccess('Category deleted successfully!')
+      fetchData()
+    } catch (err: any) {
+      setFormError(err.message || 'Failed to delete category.')
     }
   }
 
@@ -365,9 +429,19 @@ export const Admin: React.FC = () => {
 
   const resetCategoryForm = () => {
     setShowCategoryForm(false)
+    setEditingCategory(null)
     setCatName('')
     setCatSlug('')
     setCatDesc('')
+  }
+
+  const startEditCategory = (cat: Category) => {
+    setEditingCategory(cat)
+    setCatName(cat.name)
+    setCatSlug(cat.slug)
+    setCatDesc(cat.description || '')
+    setShowCategoryForm(true)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   // ---------- Bulk Upload Handlers ----------
@@ -427,6 +501,58 @@ export const Admin: React.FC = () => {
       setFormError(err.message || 'Bulk upload failed')
     } finally {
       setUploading(false)
+    }
+  }
+
+  const loadOrders = useCallback(async () => {
+    setLoadingOrders(true)
+    try {
+      const headers = await getAuthHeaders()
+      const response = await fetch(`${API_BASE_URL}/api/orders`, { headers })
+      if (!response.ok) throw new Error('Failed to fetch orders')
+      const data: AdminOrder[] = await response.json()
+      setAdminOrders(data)
+    } catch (err: any) {
+      console.error('Failed to load admin orders:', err)
+      setAdminOrders([])
+    } finally {
+      setLoadingOrders(false)
+    }
+  }, [getAuthHeaders])
+
+  const handleUpdateOrderStatus = async (orderId: string, newStatus: string, trackingInfo?: { trackingNumber: string; carrier: string }) => {
+    if (newStatus === 'shipped' && !trackingInfo) {
+      setShippingModal({ orderId })
+      setShippingTrackingNumber('')
+      setShippingCarrier('')
+      return
+    }
+
+    setUpdatingOrderId(orderId)
+    setFormError(null)
+    try {
+      const headers = await getAuthHeaders()
+      const payload: any = { status: newStatus }
+      if (trackingInfo) {
+        payload.tracking_number = trackingInfo.trackingNumber
+        payload.carrier = trackingInfo.carrier
+      }
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify(payload),
+      })
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}))
+        throw new Error(errData.detail || 'Failed to update order status')
+      }
+      const updated: AdminOrder = await response.json()
+      setAdminOrders((prev) => prev.map((o) => (o.id === orderId ? updated : o)))
+      setFormSuccess(`Order #${orderId.slice(0, 8).toUpperCase()} status updated to ${newStatus}`)
+    } catch (err: any) {
+      setFormError(err.message || 'Failed to update order status')
+    } finally {
+      setUpdatingOrderId(null)
     }
   }
 
@@ -535,6 +661,14 @@ export const Admin: React.FC = () => {
               }`}
             >
               Discounts
+            </button>
+            <button
+              onClick={() => { setActiveTab('orders'); loadOrders(); }}
+              className={`px-4 py-2 rounded-xl font-semibold transition-all whitespace-nowrap ${
+                activeTab === 'orders' ? 'bg-white border border-rose-200 text-stone-900' : 'text-stone-500 hover:text-stone-900'
+              }`}
+            >
+              Orders
             </button>
           </div>
         </div>
@@ -944,7 +1078,9 @@ export const Admin: React.FC = () => {
                 <div className="bg-white border border-rose-200 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
                   
                   <div className="flex justify-between items-center pb-4 border-b border-rose-100">
-                    <h3 className="font-display font-bold text-xl text-stone-900">Add New Category</h3>
+                    <h3 className="font-display font-bold text-xl text-stone-900">
+                      {editingCategory ? 'Edit Category' : 'Add New Category'}
+                    </h3>
                     <button onClick={resetCategoryForm} className="text-stone-400 hover:text-stone-900">
                       <X className="w-6 h-6" />
                     </button>
@@ -997,7 +1133,7 @@ export const Admin: React.FC = () => {
                         type="submit"
                         className="px-4 py-2 bg-gradient-to-r from-rose-400 to-purple-600 hover:from-rose-500 hover:to-purple-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg"
                       >
-                        Create Category
+                        {editingCategory ? 'Update Category' : 'Create Category'}
                       </button>
                     </div>
                   </form>
@@ -1024,6 +1160,7 @@ export const Admin: React.FC = () => {
                       <th className="p-4">Category Name</th>
                       <th className="p-4">Slug</th>
                       <th className="p-4">Description</th>
+                      <th className="p-4 text-right">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-900 text-sm">
@@ -1037,6 +1174,22 @@ export const Admin: React.FC = () => {
                         </td>
                         <td className="p-4 text-stone-500">
                           {cat.description || 'No description provided.'}
+                        </td>
+                        <td className="p-4 text-right">
+                          <div className="flex justify-end space-x-2">
+                            <button
+                              onClick={() => startEditCategory(cat)}
+                              className="p-1.5 bg-rose-50 border border-rose-100 hover:bg-rose-100 text-stone-700 hover:text-stone-900 rounded-lg transition-all"
+                            >
+                              <Edit2 className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteCategory(cat.id)}
+                              className="p-1.5 bg-rose-50 border border-rose-100 hover:bg-rose-500 hover:text-white text-rose-400 hover:border-rose-500 rounded-lg transition-all"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -1298,6 +1451,140 @@ export const Admin: React.FC = () => {
           </div>
         )}
 
+        {/* Tab: Orders */}
+        {activeTab === 'orders' && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold text-lg text-stone-900">All Orders</h3>
+              <button
+                onClick={loadOrders}
+                disabled={loadingOrders}
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-stone-500 hover:text-stone-900 bg-white border border-rose-200 rounded-xl transition-all"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${loadingOrders ? 'animate-spin' : ''}`} />
+                Refresh
+              </button>
+            </div>
+
+            {loadingOrders ? (
+              <div className="flex items-center justify-center h-48">
+                <Loader2 className="w-8 h-8 text-rose-400 animate-spin" />
+              </div>
+            ) : adminOrders.length === 0 ? (
+              <div className="p-12 text-center bg-white/50 border border-rose-200/50 rounded-2xl text-stone-400">
+                <Package className="w-10 h-10 mx-auto mb-3 opacity-40" />
+                <p className="text-sm">No orders found.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm bg-white/60 border border-rose-200 rounded-2xl overflow-hidden">
+                  <thead>
+                    <tr className="border-b border-rose-100 bg-rose-50/60">
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Order ID</th>
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Customer</th>
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Items</th>
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Total</th>
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Date</th>
+                      <th className="p-4 text-left text-xs font-bold text-stone-500 uppercase tracking-wider">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-rose-100/60">
+                    {adminOrders.map((order) => {
+                      const statusStyles: Record<string, string> = {
+                        pending:   'bg-amber-500/10 border-amber-500/20 text-amber-500',
+                        paid:      'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+                        shipped:   'bg-cyan-500/10 border-cyan-500/20 text-cyan-400',
+                        delivered: 'bg-teal-500/10 border-teal-500/20 text-teal-500',
+                        cancelled: 'bg-rose-500/10 border-rose-500/20 text-rose-400',
+                        failed:    'bg-stone-200 border-stone-300 text-stone-500',
+                      }
+                      const isTerminal = ['delivered', 'cancelled', 'failed'].includes(order.status)
+                      const isUpdating = updatingOrderId === order.id
+                      return (
+                        <tr key={order.id} className="hover:bg-white/40 transition-colors">
+                          {/* Order ID */}
+                          <td className="p-4">
+                            <span className="font-mono text-xs font-bold text-stone-700">
+                              #{order.id.slice(0, 8).toUpperCase()}
+                            </span>
+                            {order.razorpay_payment_id && (
+                              <p className="text-[10px] text-stone-400 mt-0.5 font-mono">
+                                {order.razorpay_payment_id.slice(0, 14)}…
+                              </p>
+                            )}
+                          </td>
+
+                          {/* Customer */}
+                          <td className="p-4">
+                            <p className="font-semibold text-stone-900 text-xs">
+                              {order.shipping_address?.full_name || '—'}
+                            </p>
+                            <p className="text-[10px] text-stone-400 mt-0.5">
+                              {order.shipping_address?.city}{order.shipping_address?.state ? `, ${order.shipping_address.state}` : ''}
+                            </p>
+                          </td>
+
+                          {/* Items */}
+                          <td className="p-4">
+                            <ul className="space-y-0.5">
+                              {order.order_items.slice(0, 2).map((item) => (
+                                <li key={item.id} className="text-[11px] text-stone-500">
+                                  {item.products?.name ?? 'Product'} × {item.quantity}
+                                </li>
+                              ))}
+                              {order.order_items.length > 2 && (
+                                <li className="text-[10px] text-stone-400">+{order.order_items.length - 2} more</li>
+                              )}
+                            </ul>
+                          </td>
+
+                          {/* Total */}
+                          <td className="p-4 font-bold text-stone-900">
+                            ₹{order.total_amount.toLocaleString()}
+                          </td>
+
+                          {/* Date */}
+                          <td className="p-4 text-xs text-stone-500">
+                            {order.created_at
+                              ? new Date(order.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+                              : '—'}
+                          </td>
+
+                          {/* Status Dropdown */}
+                          <td className="p-4">
+                            {isTerminal ? (
+                              <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border inline-flex items-center gap-1 ${statusStyles[order.status] ?? ''}`}>
+                                {order.status}
+                              </span>
+                            ) : (
+                              <div className="flex items-center gap-2">
+                                <select
+                                  value={order.status}
+                                  disabled={isUpdating}
+                                  onChange={(e) => handleUpdateOrderStatus(order.id, e.target.value)}
+                                  className="text-xs font-semibold px-2.5 py-1.5 bg-rose-50 border border-rose-200 rounded-xl text-stone-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30 cursor-pointer disabled:opacity-50"
+                                >
+                                  <option value="pending">Pending</option>
+                                  <option value="paid">Paid</option>
+                                  <option value="shipped">Shipped</option>
+                                  <option value="delivered">Delivered</option>
+                                  <option value="cancelled">Cancelled</option>
+                                  <option value="failed">Failed</option>
+                                </select>
+                                {isUpdating && <Loader2 className="w-3.5 h-3.5 text-rose-400 animate-spin" />}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Date Range Modal for Discount Upload */}
         {showDateModal && (
           <div className="fixed inset-0 bg-rose-50/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
@@ -1366,6 +1653,78 @@ export const Admin: React.FC = () => {
                   className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-stone-900 rounded-xl text-xs font-semibold shadow-lg"
                 >
                   Confirm Schedule
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Shipping Tracking Modal */}
+        {shippingModal && (
+          <div className="fixed inset-0 bg-rose-50/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+            <div className="bg-white border border-rose-200 rounded-3xl p-8 max-w-md w-full relative shadow-2xl space-y-6">
+              <div className="flex justify-between items-center pb-4 border-b border-rose-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
+                    <Truck className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-lg text-stone-900">Shipping Details</h3>
+                    <p className="text-[10px] text-stone-500">Provide tracking info for this shipment</p>
+                  </div>
+                </div>
+                <button onClick={() => setShippingModal(null)} className="text-stone-400 hover:text-stone-900">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1.5">
+                    Courier / Carrier Name
+                  </label>
+                  <input
+                    type="text"
+                    value={shippingCarrier}
+                    onChange={(e) => setShippingCarrier(e.target.value)}
+                    placeholder="e.g. BlueDart, FedEx, Delhivery"
+                    className="block w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-cyan-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1.5">
+                    Tracking Number (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={shippingTrackingNumber}
+                    onChange={(e) => setShippingTrackingNumber(e.target.value)}
+                    placeholder="e.g. 1234567890"
+                    className="block w-full px-3 py-2.5 bg-rose-50 border border-rose-100 rounded-xl text-sm text-stone-900 focus:outline-none focus:border-cyan-500"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-rose-100 flex justify-end space-x-3">
+                <button
+                  type="button"
+                  onClick={() => setShippingModal(null)}
+                  className="px-4 py-2 bg-rose-50 border border-rose-100 hover:bg-rose-50 text-stone-700 rounded-xl text-xs font-semibold transition-all"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleUpdateOrderStatus(shippingModal.orderId, 'shipped', {
+                      trackingNumber: shippingTrackingNumber,
+                      carrier: shippingCarrier
+                    })
+                    setShippingModal(null)
+                  }}
+                  className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-xl text-xs font-semibold shadow-lg"
+                >
+                  Mark as Shipped
                 </button>
               </div>
             </div>
